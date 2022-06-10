@@ -23,6 +23,8 @@
 		A989EFB128534DB500E359BF /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFB028534DB500E359BF /* ServiceManager.swift */; };
 		A989EFB328534DCF00E359BF /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFB228534DCF00E359BF /* NetworkManager.swift */; };
 		A989EFB528534DDE00E359BF /* NetworkManagerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFB428534DDE00E359BF /* NetworkManagerContext.swift */; };
+		A989EFB72853D21200E359BF /* LineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFB62853D21200E359BF /* LineViewCell.swift */; };
+		A989EFB92853D2C900E359BF /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFB82853D2C900E359BF /* GridViewCell.swift */; };
 		A9975AB1284E922500618AE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB0284E922500618AE6 /* AppDelegate.swift */; };
 		A9975AB3284E922500618AE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB2284E922500618AE6 /* SceneDelegate.swift */; };
 		A9975ABB284E922500618AE6 /* file_manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB9284E922500618AE6 /* file_manager.xcdatamodeld */; };
@@ -53,6 +55,8 @@
 		A989EFB028534DB500E359BF /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		A989EFB228534DCF00E359BF /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A989EFB428534DDE00E359BF /* NetworkManagerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerContext.swift; sourceTree = "<group>"; };
+		A989EFB62853D21200E359BF /* LineViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewCell.swift; sourceTree = "<group>"; };
+		A989EFB82853D2C900E359BF /* GridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
 		A9975AAD284E922500618AE6 /* file-manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "file-manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9975AB0284E922500618AE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9975AB2284E922500618AE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 		A989EF8C28533F3400E359BF /* Folder */ = {
 			isa = PBXGroup;
 			children = (
+				A989EFB62853D21200E359BF /* LineViewCell.swift */,
+				A989EFB82853D2C900E359BF /* GridViewCell.swift */,
 				A989EF902853403F00E359BF /* FolderViewController.swift */,
 				A989EF922853406D00E359BF /* FolderViewModel.swift */,
 				A989EF942853407700E359BF /* FolderModel.swift */,
@@ -262,11 +268,13 @@
 				A989EFB128534DB500E359BF /* ServiceManager.swift in Sources */,
 				A9975AFF2852722F00618AE6 /* Item+CoreDataProperties.swift in Sources */,
 				A9975B012852722F00618AE6 /* Folder+CoreDataProperties.swift in Sources */,
+				A989EFB72853D21200E359BF /* LineViewCell.swift in Sources */,
 				A9975AB1284E922500618AE6 /* AppDelegate.swift in Sources */,
 				A989EFA12853436600E359BF /* AppCoordinator.swift in Sources */,
 				A989EFA9285345F300E359BF /* CoreDataBase.swift in Sources */,
 				A989EF99285340F700E359BF /* FileViewController.swift in Sources */,
 				A9975B022852722F00618AE6 /* File+CoreDataProperties.swift in Sources */,
+				A989EFB92853D2C900E359BF /* GridViewCell.swift in Sources */,
 				A9975AB3284E922500618AE6 /* SceneDelegate.swift in Sources */,
 				A989EFB328534DCF00E359BF /* NetworkManager.swift in Sources */,
 				A989EFB528534DDE00E359BF /* NetworkManagerContext.swift in Sources */,
