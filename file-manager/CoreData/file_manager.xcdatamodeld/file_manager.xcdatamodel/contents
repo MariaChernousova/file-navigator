@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="File" representedClassName="File" parentEntity="Item" syncable="YES">
+        <attribute name="nameExtension" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
+    <entity name="Folder" representedClassName="Folder" parentEntity="Item" syncable="YES">
+        <attribute name="title" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="parentItem" inverseEntity="Item"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" isAbstract="YES" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <relationship name="parentItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="items" inverseEntity="Folder"/>
+    </entity>
+    <elements>
+        <element name="File" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Folder" positionX="202.5625" positionY="-18.20703125" width="128" height="73"/>
+        <element name="Item" positionX="99" positionY="72" width="128" height="73"/>
+    </elements>
+</model>
