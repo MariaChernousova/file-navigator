@@ -13,18 +13,37 @@ class FolderCoordinator: Coordinator {
         case file(id: String)
     }
     
-    var serviceManager: ServiceManager
+    let serviceManager: ServiceManager
+    let rootViewController: UINavigationController
+    private let folderId: String?
     
-    var rootViewController: UINavigationController
-    
-    init(serviceManager: ServiceManager, rootViewController: UINavigationController) {
+    init(serviceManager: ServiceManager, rootViewController: UINavigationController, folderId: String?) {
         self.serviceManager = serviceManager
         self.rootViewController = rootViewController
+        self.folderId = folderId
     }
     
     func start() {
+        let model = FolderModel(serviceManager: serviceManager)
+        let viewModel = FolderViewModel(model: model) { path in
+            switch path {
+            case .folder(let id):
+                self.startFolderFlow(with: id)
+            case .file(let id):
+                self.startFileFlow(with: id)
+            }
+        }
         
+        let viewController = FolderViewController(viewModel: viewModel)
+        
+        rootViewController.pushViewController(viewController, animated: true)
     }
     
+    private func startFolderFlow(with folderID: String) {
+        FolderCoordinator(serviceManager: serviceManager, rootViewController: rootViewController, folderId: folderID).start()
+    }
     
+    private func startFileFlow(with fileID: String) {
+        
+    }
 }

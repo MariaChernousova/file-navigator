@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import CoreData
 
 protocol FolderViewModelProvider {
     func didLoad()
 }
 
-class FolderViewModel: FolderViewModelProvider {
+class FolderViewModel: NSObject {
     typealias PathHandler = (FolderCoordinator.Path) -> Void
     
     var folderViewModelProvider: FolderViewModelProvider { self }
@@ -24,8 +25,14 @@ class FolderViewModel: FolderViewModelProvider {
         self.model = model
         self.pathHandler = pathHandler
     }
-    
+}
+
+extension FolderViewModel: FolderViewModelProvider {
     func didLoad() {
-        
+
     }
+}
+
+extension FolderViewModel: NSFetchedResultsControllerDelegate {
+    
 }

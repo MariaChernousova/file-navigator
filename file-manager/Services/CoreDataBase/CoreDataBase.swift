@@ -8,6 +8,11 @@
 import Foundation
 import CoreData
 
+enum CoreDataStackError: Error {
+    case unknown
+    case error(NSError)
+}
+
 class CoreDataBase: CoreDataBaseContext {
     private let modelName: String
     
@@ -26,4 +31,23 @@ class CoreDataBase: CoreDataBaseContext {
         }
         return container
     }()
+    
+    func fetch<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>,
+                                        completionHandler: @escaping (Result<[T], CoreDataStackError>) -> Void) {
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(fetchRequest: fetchRequest) { fetchRequest in
+            DispatchQueue.main.async {
+                if let finalResult = fetchRequest.finalResult {
+                    completionHandler(.success(finalResult))
+                } else {
+                    completionHandler(.failure(.unknown))
+                }
+            }
+        }
+        
+        do {
+            try context.execute(asynchronousFetchRequest)
+        } catch let error as NSError {
+            completionHandler(.failure(.error(error)))
+        }
+    }
 }

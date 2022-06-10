@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import CoreData
 
 protocol FolderModelProvider {
-    
+
 }
 
 class FolderModel: FolderModelProvider {
+
     private let coreDataBase: CoreDataBaseContext
     private let networkManager: NetworkManagerContext
-    
+      
     init(serviceManager: ServiceManager) {
         self.coreDataBase = serviceManager.coreDataBase
         self.networkManager = serviceManager.networkManager

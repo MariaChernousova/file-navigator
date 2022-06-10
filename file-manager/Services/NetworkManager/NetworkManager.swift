@@ -7,6 +7,6 @@
 
 import Foundation
 
-class NetworkManager {
+class NetworkManager: NetworkManagerContext {
     
 }
