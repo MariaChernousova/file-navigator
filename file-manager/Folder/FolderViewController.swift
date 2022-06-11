@@ -16,11 +16,50 @@ class FolderViewController: UIViewController {
     
     private var isTable = false
     private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero)
-        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
-        collectionView.collectionViewLayout = isTable ? UICollectionViewCompositionalLayout.list(using: configuration) : createCompositionalLayout()
+        let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: isTable ?
+                                              UICollectionViewCompositionalLayout.list(using: configuration) :
+                                                createCompositionalLayout())
         return collectionView
     }()
+    
+    
+    private lazy var addFolderItem = UIAction(
+        title: "Add folder",
+        image: UIImage(systemName: "folder.badge.plus")
+    ) { action in
+        
+        print("Add folder action was tapped")
+    }
+    
+    private lazy var addFileItem = UIAction(
+        title: "Add file",
+        image: UIImage(systemName: "doc.badge.plus")
+    ) { action in
+        
+        print("Add folder action was tapped")
+    }
+    
+    private lazy var menu = UIMenu(
+        title: "Add...",
+        options: .displayInline,
+        children: [addFileItem, addFolderItem]
+    )
+    
+    private lazy var menuButtonItem = UIBarButtonItem(
+        image: UIImage(systemName: "plus"),
+        menu: menu
+    )
+    
+    private lazy var collectionTableSwitcherItem = UIBarButtonItem(
+        image: isTable ?
+        UIImage(systemName: "list.bullet") :
+        UIImage(systemName: "square.grid.2x2"),
+        style: .done,
+        target: self,
+        action: nil
+    )
     
     private let viewModel: FolderViewModelProvider
     
@@ -35,7 +74,7 @@ class FolderViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .systemBackground
         commonInit()
         viewModel.didLoad()
     }
@@ -60,6 +99,10 @@ class FolderViewController: UIViewController {
     
     private func setupSubviews() {
         view.addSubview(collectionView)
+        
+        navigationItem.title = "Sample"
+        navigationItem.rightBarButtonItems = [menuButtonItem,
+                                              collectionTableSwitcherItem]
     }
     
     private func setupAutoLayout() {
