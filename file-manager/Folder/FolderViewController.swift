@@ -8,6 +8,20 @@
 import UIKit
 
 class FolderViewController: UIViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
+    
+    enum Section: CaseIterable {
+        case main
+    }
+    
+    private var isTable = false
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero)
+        var configuration = UICollectionLayoutListConfiguration(appearance: .plain)
+        collectionView.collectionViewLayout = isTable ? UICollectionViewCompositionalLayout.list(using: configuration) : createCompositionalLayout()
+        return collectionView
+    }()
+    
     private let viewModel: FolderViewModelProvider
     
     init(viewModel: FolderViewModelProvider) {
@@ -22,6 +36,40 @@ class FolderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBlue
+        commonInit()
         viewModel.didLoad()
+    }
+    
+    private func commonInit() {
+        setupSubviews()
+        setupAutoLayout()
+    }
+    
+    private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        let fraction: CGFloat = 1 / 3
+
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fraction), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(fraction))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    
+    private func setupSubviews() {
+        view.addSubview(collectionView)
+    }
+    
+    private func setupAutoLayout() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
 }
