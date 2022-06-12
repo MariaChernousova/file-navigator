@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkManagerContext {
-    
+    func loadData(completionHandler: @escaping (Result<SpreadSheet, Error>) -> Void)
 }

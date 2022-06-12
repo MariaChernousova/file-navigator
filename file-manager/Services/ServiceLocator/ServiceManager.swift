@@ -8,6 +8,7 @@
 import Foundation
 
 protocol ServiceManager {
-    var coreDataBase: CoreDataBaseContext { get }
+    var itemsFetcher: ItemsFetcherContext { get }
     var networkManager: NetworkManagerContext { get }
+    var dataManager: DataManagerContext { get }
 }

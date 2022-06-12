@@ -14,11 +14,15 @@ class GridViewCell: UICollectionViewCell {
     
     private lazy var typeImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
+        label.numberOfLines = .zero
+        label.textAlignment = .center
         return label
     }()
     
@@ -40,6 +44,10 @@ class GridViewCell: UICollectionViewCell {
     private func setupSubviews() {
         contentView.addSubview(typeImageView)
         contentView.addSubview(titleLabel)
+                
+        layer.borderColor = UIColor.systemGray.cgColor
+        layer.borderWidth = 0.5
+        layer.cornerRadius = 10
     }
     
     private func setupAutoLayout() {
@@ -47,16 +55,20 @@ class GridViewCell: UICollectionViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            typeImageView.widthAnchor.constraint(equalToConstant: 44),
-            typeImageView.heightAnchor.constraint(equalToConstant: 44),
             typeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             typeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            typeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            typeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
-            titleLabel.topAnchor.constraint(equalTo: typeImageView.topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+            titleLabel.heightAnchor.constraint(equalToConstant: 44),
+            titleLabel.topAnchor.constraint(equalTo: typeImageView.bottomAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         ])
+    }
+    
+    func configure(with title: String, image: String) {
+        titleLabel.text = title
+        typeImageView.image = UIImage(systemName: image)
     }
 }

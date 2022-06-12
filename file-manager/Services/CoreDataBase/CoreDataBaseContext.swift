@@ -10,4 +10,6 @@ import CoreData
 
 protocol CoreDataBaseContext {
     var context: NSManagedObjectContext { get }
+    
+    func saveContext(completionHandler: ((Result<Bool, CoreDataStackError>) -> Void)?)
 }

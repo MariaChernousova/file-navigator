@@ -13,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private(set) var appCoordinator: AppCoordinator?
     
     private lazy var serviceLocator = ServiceLocator()
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let navigationController = UINavigationController()
@@ -36,8 +36,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 extension SceneDelegate {
     private func configureCoreDataBase() {
-        let fileManagerCoreDataBase: CoreDataBaseContext = CoreDataBase(modelName: "file_manager")
-        serviceLocator.register(fileManagerCoreDataBase)
+        let coreDataBase: CoreDataBaseContext = CoreDataBase(modelName: "file_manager")
+        
+        let itemsFetcher: ItemsFetcherContext = ItemsFetcher(coreDataBaseContext: coreDataBase)
+        serviceLocator.register(itemsFetcher)
+        let dataManager: DataManagerContext = DataManager(coreDataBase: coreDataBase)
+        serviceLocator.register(dataManager)
     }
     
     private func configureNetworkManager() {

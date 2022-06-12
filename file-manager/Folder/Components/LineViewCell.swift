@@ -14,6 +14,8 @@ class LineViewCell: UICollectionViewCell {
     
     private lazy var typeImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -48,7 +50,6 @@ class LineViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             typeImageView.widthAnchor.constraint(equalToConstant: 44),
-            typeImageView.heightAnchor.constraint(equalToConstant: 44),
             typeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             typeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             typeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
@@ -58,5 +59,10 @@ class LineViewCell: UICollectionViewCell {
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -8)
         ])
+    }
+    
+    func configure(with title: String, image: String) {
+        titleLabel.text = title
+        typeImageView.image = UIImage(systemName: image)
     }
 }

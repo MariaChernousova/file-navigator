@@ -2,7 +2,7 @@
 //  Item+CoreDataProperties.swift
 //  file-manager
 //
-//  Created by Chernousova Maria on 09.06.2022.
+//  Created by Chernousova Maria on 14.06.2022.
 //
 //
 
@@ -17,6 +17,7 @@ extension Item {
     }
 
     @NSManaged public var id: String?
+    @NSManaged public var title: String?
     @NSManaged public var parentItem: Folder?
 
 }
