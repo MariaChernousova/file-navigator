@@ -29,7 +29,7 @@ class FolderViewModel: NSObject {
 
 extension FolderViewModel: FolderViewModelProvider {
     func didLoad() {
-
+        model.loadData()
     }
 }
 

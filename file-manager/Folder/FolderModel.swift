@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol FolderModelProvider {
-
+    func loadData()
 }
 
 class FolderModel: FolderModelProvider {
@@ -20,5 +20,9 @@ class FolderModel: FolderModelProvider {
     init(serviceManager: ServiceManager) {
         self.coreDataBase = serviceManager.coreDataBase
         self.networkManager = serviceManager.networkManager
+    }
+    
+    func loadData() {
+        networkManager.loadData()
     }
 }
