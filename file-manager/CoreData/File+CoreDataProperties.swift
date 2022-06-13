@@ -2,7 +2,7 @@
 //  File+CoreDataProperties.swift
 //  file-manager
 //
-//  Created by Chernousova Maria on 09.06.2022.
+//  Created by Eric Golovin on 14.06.2022.
 //
 //
 
@@ -17,6 +17,5 @@ extension File {
     }
 
     @NSManaged public var nameExtension: String?
-    @NSManaged public var title: String?
 
 }

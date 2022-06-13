@@ -28,12 +28,12 @@ extension ServiceLocator: ServiceManager {
         static let errorMessage = "'%@' cannot be resolved"
     }
     
-    var coreDataBase: CoreDataBaseContext {
-        guard let coreDataBase: CoreDataBaseContext = resolve() else {
+    var itemsFetcher: ItemsFetcherContext {
+        guard let itemsFetcher: ItemsFetcherContext = resolve() else {
             fatalError(.init(format: Const.errorMessage,
-                             arguments: [String(describing: CoreDataBaseContext.self)]))
+                             arguments: [String(describing: ItemsFetcherContext.self)]))
         }
-        return coreDataBase
+        return itemsFetcher
     }
     
     var networkManager: NetworkManagerContext {
@@ -42,5 +42,13 @@ extension ServiceLocator: ServiceManager {
                              arguments: [String(describing: NetworkManagerContext.self)]))
         }
         return networkManager
+    }
+    
+    var dataManager: DataManagerContext {
+        guard let dataManager: DataManagerContext = resolve() else {
+            fatalError(.init(format: Const.errorMessage,
+                             arguments: [String(describing: DataManagerContext.self)]))
+        }
+        return dataManager
     }
 }

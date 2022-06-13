@@ -8,11 +8,6 @@
 import UIKit
 
 class FolderViewController: UIViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
-    
-    enum Section: CaseIterable {
-        case main
-    }
     
     private var isTable = false
     private lazy var collectionView: UICollectionView = {

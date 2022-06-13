@@ -6,13 +6,12 @@
 //
 
 import Foundation
-import CoreData
 
 protocol FolderViewModelProvider {
     func didLoad()
 }
 
-class FolderViewModel: NSObject {
+class FolderViewModel: FolderViewModelProvider {
     typealias PathHandler = (FolderCoordinator.Path) -> Void
     
     var folderViewModelProvider: FolderViewModelProvider { self }
@@ -25,14 +24,42 @@ class FolderViewModel: NSObject {
         self.model = model
         self.pathHandler = pathHandler
     }
-}
-
-extension FolderViewModel: FolderViewModelProvider {
-    func didLoad() {
-        model.loadData()
-    }
-}
-
-extension FolderViewModel: NSFetchedResultsControllerDelegate {
     
+    // MARK: - Public methods.
+    
+    func didLoad() {
+        model.loadData { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let spreadsheet):
+                self.saveData(rows: spreadsheet.values) { result in
+                    switch result {
+                    case .success(let homeFolderId):
+                        self.fetchRows(with: homeFolderId) { result in
+                            switch result {
+                            case .success(let snapshot):
+                                print(snapshot)
+                            case .failure(let error):
+                                print(error.localizedDescription)
+                            }
+                        }
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    // MARK: - Private methods.
+    
+    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, CoreDataStackError>) -> Void)) {
+        model.saveData(rows: rows, completionHandler: completionHandler)
+    }
+    
+    private func fetchRows(with parentFolderId: String, updateHandler: @escaping ItemsFetcherUpdateHandler) {
+        model.fetchItems(with: parentFolderId, updateHandler: updateHandler)
+    }
 }

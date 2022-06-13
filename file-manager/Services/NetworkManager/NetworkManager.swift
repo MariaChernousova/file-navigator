@@ -16,7 +16,7 @@ struct SpreadSheet: Codable {
     
     struct Row: Codable {
         let id: String
-        let parentId: String
+        let parentId: String?
         let item: Item
         let title: String
         
@@ -30,7 +30,7 @@ struct SpreadSheet: Codable {
             }
             
             self.id = values[0]
-            self.parentId = values[1]
+            self.parentId = values[1].isEmpty ? nil : values[1]
             self.item = item
             self.title = values[3]
         }
@@ -46,7 +46,7 @@ class NetworkManager: NetworkManagerContext {
     let sheetID = "1zh-hfE9O14gaHi33bpWlsyZ89j-WqyIFezr2fqgGtW8"
     let range = "Sheet1!A:E"
     
-    func loadData() {
+    func loadData(completionHandler: @escaping (Result<SpreadSheet, Error>) -> Void) {
         guard let url = buildURL(),
               let bundleIdentifier =  Bundle.main.bundleIdentifier else {
             return
@@ -64,8 +64,12 @@ class NetworkManager: NetworkManagerContext {
             do {
                 let spreadsheet = try JSONDecoder().decode(SpreadSheet.self, from: data!)
                 print(spreadsheet)
+                
+                completionHandler(.success(spreadsheet))
             } catch let error {
                 print(error.localizedDescription)
+                
+                completionHandler(.failure(error))
             }
         }.resume()
     }
