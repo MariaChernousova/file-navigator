@@ -25,6 +25,8 @@
 		A989EFB528534DDE00E359BF /* NetworkManagerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFB428534DDE00E359BF /* NetworkManagerContext.swift */; };
 		A989EFB72853D21200E359BF /* LineViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFB62853D21200E359BF /* LineViewCell.swift */; };
 		A989EFB92853D2C900E359BF /* GridViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFB82853D2C900E359BF /* GridViewCell.swift */; };
+		A989EFD028577D0F00E359BF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFCF28577D0F00E359BF /* DataManager.swift */; };
+		A989EFD228577D1B00E359BF /* DataManagerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFD128577D1B00E359BF /* DataManagerContext.swift */; };
 		A9975AB1284E922500618AE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB0284E922500618AE6 /* AppDelegate.swift */; };
 		A9975AB3284E922500618AE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB2284E922500618AE6 /* SceneDelegate.swift */; };
 		A9975ABB284E922500618AE6 /* file_manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB9284E922500618AE6 /* file_manager.xcdatamodeld */; };
@@ -57,6 +59,8 @@
 		A989EFB428534DDE00E359BF /* NetworkManagerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerContext.swift; sourceTree = "<group>"; };
 		A989EFB62853D21200E359BF /* LineViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineViewCell.swift; sourceTree = "<group>"; };
 		A989EFB82853D2C900E359BF /* GridViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewCell.swift; sourceTree = "<group>"; };
+		A989EFCF28577D0F00E359BF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		A989EFD128577D1B00E359BF /* DataManagerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerContext.swift; sourceTree = "<group>"; };
 		A9975AAD284E922500618AE6 /* file-manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "file-manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9975AB0284E922500618AE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9975AB2284E922500618AE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +114,7 @@
 		A989EFA42853447E00E359BF /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A989EFCE28577CEC00E359BF /* DataManager */,
 				A989EFA72853457100E359BF /* ServiceLocator */,
 				A989EFA62853455B00E359BF /* CoreDataBase */,
 				A989EFA52853454B00E359BF /* NetworkManager */,
@@ -142,6 +147,15 @@
 				A989EFAE28534DAC00E359BF /* ServiceLocator.swift */,
 			);
 			path = ServiceLocator;
+			sourceTree = "<group>";
+		};
+		A989EFCE28577CEC00E359BF /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				A989EFD128577D1B00E359BF /* DataManagerContext.swift */,
+				A989EFCF28577D0F00E359BF /* DataManager.swift */,
+			);
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		A9975AA4284E922500618AE6 = {
@@ -279,12 +293,14 @@
 				A989EFB328534DCF00E359BF /* NetworkManager.swift in Sources */,
 				A989EFB528534DDE00E359BF /* NetworkManagerContext.swift in Sources */,
 				A9975ABB284E922500618AE6 /* file_manager.xcdatamodeld in Sources */,
+				A989EFD028577D0F00E359BF /* DataManager.swift in Sources */,
 				A989EF9B2853410800E359BF /* FileViewModel.swift in Sources */,
 				A989EF9F2853411E00E359BF /* FileCoordinator.swift in Sources */,
 				A989EFAF28534DAC00E359BF /* ServiceLocator.swift in Sources */,
 				A9975B032852722F00618AE6 /* Folder+CoreDataClass.swift in Sources */,
 				A989EFAB2853460300E359BF /* CoreDataBaseContext.swift in Sources */,
 				A989EF972853408300E359BF /* FolderCoordinator.swift in Sources */,
+				A989EFD228577D1B00E359BF /* DataManagerContext.swift in Sources */,
 				A989EF912853403F00E359BF /* FolderViewController.swift in Sources */,
 				A9975AFE2852722F00618AE6 /* File+CoreDataClass.swift in Sources */,
 				A9975B002852722F00618AE6 /* Item+CoreDataClass.swift in Sources */,

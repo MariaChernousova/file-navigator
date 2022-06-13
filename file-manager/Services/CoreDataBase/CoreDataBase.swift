@@ -50,4 +50,29 @@ class CoreDataBase: CoreDataBaseContext {
             completionHandler(.failure(.error(error)))
         }
     }
+    
+    func saveContext(completionHandler: ((Result<Bool, CoreDataStackError>) -> Void)?) {
+        guard context.hasChanges else { return }
+        
+        let privateManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateManagedObjectContext.parent = context
+        
+        do {
+            try privateManagedObjectContext.save()
+            context.performAndWait {
+                do {
+                    try self.context.save()
+                    DispatchQueue.main.async {
+                        completionHandler?(.success(true))
+                    }
+                } catch let error as NSError {
+                    DispatchQueue.main.async {
+                        completionHandler?(.failure(.error(error)))
+                    }
+                }
+            }
+        } catch let error as NSError {
+            completionHandler?(.failure(.error(error)))
+        }
+    }
 }
