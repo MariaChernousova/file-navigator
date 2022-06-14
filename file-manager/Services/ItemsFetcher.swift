@@ -2,7 +2,7 @@
 //  ItemsFetcher.swift
 //  file-manager
 //
-//  Created by Eric Golovin on 14.06.2022.
+//  Created by Chernousova Maria on 13.06.2022.
 //
 
 import UIKit

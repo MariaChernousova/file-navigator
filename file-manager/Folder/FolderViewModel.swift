@@ -8,6 +8,7 @@
 import Foundation
 
 protocol FolderViewModelProvider {
+    var updateAction: ((ItemsFetcherSnapshot) -> Void)? { get set }
     func didLoad()
 }
 
@@ -15,7 +16,7 @@ class FolderViewModel: FolderViewModelProvider {
     typealias PathHandler = (FolderCoordinator.Path) -> Void
     
     var folderViewModelProvider: FolderViewModelProvider { self }
-    var updateAction: (([Item]) -> Void)?
+    var updateAction: ((ItemsFetcherSnapshot) -> Void)?
     
     private let model: FolderModelProvider
     private let pathHandler: PathHandler
@@ -39,6 +40,7 @@ class FolderViewModel: FolderViewModelProvider {
                             switch result {
                             case .success(let snapshot):
                                 print(snapshot)
+                                self.updateAction?(snapshot as ItemsFetcherSnapshot)
                             case .failure(let error):
                                 print(error.localizedDescription)
                             }

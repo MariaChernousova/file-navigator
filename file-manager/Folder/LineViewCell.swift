@@ -59,4 +59,9 @@ class LineViewCell: UICollectionViewCell {
             titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -8)
         ])
     }
+    
+    func configure(with title: String) {
+        titleLabel.text = title
+        typeImageView.image = UIImage(systemName: "folder")
+    }
 }

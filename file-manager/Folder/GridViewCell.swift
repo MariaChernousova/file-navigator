@@ -59,4 +59,9 @@ class GridViewCell: UICollectionViewCell {
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
         ])
     }
+    
+    func configure(with title: String) {
+        titleLabel.text = title
+        typeImageView.image = UIImage(systemName: "folder")
+    }
 }
