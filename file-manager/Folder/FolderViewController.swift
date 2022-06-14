@@ -59,6 +59,8 @@ class FolderViewController: UIViewController {
     )
     
     private lazy var dataSource = ItemsFetcherDataSource(collectionView: collectionView) { collectionView, indexPath, cellData -> UICollectionViewCell? in
+        let item = self.viewModel.object(at: indexPath)
+        print(item)
         guard let gridCell = collectionView.dequeueReusableCell(withReuseIdentifier: GridViewCell.identifier, for: indexPath) as? GridViewCell,
               let lineCell = collectionView.dequeueReusableCell(withReuseIdentifier: LineViewCell.identifier, for: indexPath) as? LineViewCell else { return nil }
 //        guard let title = cellData.title else { return nil }

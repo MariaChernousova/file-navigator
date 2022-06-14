@@ -9,7 +9,9 @@ import Foundation
 
 protocol FolderViewModelProvider {
     var updateAction: ((ItemsFetcherSnapshot) -> Void)? { get set }
+    
     func didLoad()
+    func object(at indexPath: IndexPath) -> Item?
 }
 
 class FolderViewModel: FolderViewModelProvider {
@@ -53,6 +55,10 @@ class FolderViewModel: FolderViewModelProvider {
                 print(error)
             }
         }
+    }
+    
+    func object(at indexPath: IndexPath) -> Item? {
+        model.object(at: indexPath)
     }
     
     // MARK: - Private methods.

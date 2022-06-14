@@ -12,6 +12,7 @@ protocol FolderModelProvider {
     func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, CoreDataStackError>) -> Void))
     func fetchItems(with parentFolderId: String,
                     updateHandler: @escaping ItemsFetcherUpdateHandler)
+    func object(at indexPath: IndexPath) -> Item?
 }
 
 class FolderModel: FolderModelProvider {
@@ -36,5 +37,9 @@ class FolderModel: FolderModelProvider {
     
     func fetchItems(with parentFolderId: String, updateHandler: @escaping ItemsFetcherUpdateHandler) {
         itemsFetcher.fetchItems(with: parentFolderId, updateHandler: updateHandler)
+    }
+    
+    func object(at indexPath: IndexPath) -> Item? {
+        itemsFetcher.fetchResultController?.object(at: indexPath)
     }
 }

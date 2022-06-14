@@ -10,10 +10,11 @@ import CoreData
 
 class ItemsFetcher: NSObject, ItemsFetcherContext {
     
+    var fetchResultController: NSFetchedResultsController<Item>?
+    
     private let coreDataBaseContext: CoreDataBaseContext
     
     private var updateHandler: ItemsFetcherUpdateHandler?
-    private var fetchResultController: NSFetchedResultsController<Item>?
     
     init(coreDataBaseContext: CoreDataBaseContext) {
         self.coreDataBaseContext = coreDataBaseContext
