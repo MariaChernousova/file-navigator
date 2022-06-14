@@ -8,18 +8,18 @@
 import UIKit
 
 class FolderViewController: UIViewController {
-    enum Section: CaseIterable {
-        case main
+    
+    enum ViewType {
+        case grid
+        case list
     }
     
-    private var isTable = false
+    private var viewType = ViewType.grid
     
     private lazy var collectionView: UICollectionView = {
         let configuration = UICollectionLayoutListConfiguration(appearance: .plain)
         let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: isTable ?
-                                              UICollectionViewCompositionalLayout.list(using: configuration) :
-                                                createCompositionalLayout())
+                                              collectionViewLayout: applyCollectionViewLayout(viewType))
         return collectionView
     }()
     
@@ -60,18 +60,53 @@ class FolderViewController: UIViewController {
     
     private lazy var dataSource = ItemsFetcherDataSource(collectionView: collectionView) { collectionView, indexPath, cellData -> UICollectionViewCell? in
         let item = self.viewModel.object(at: indexPath)
-        print(item)
-        guard let gridCell = collectionView.dequeueReusableCell(withReuseIdentifier: GridViewCell.identifier, for: indexPath) as? GridViewCell,
-              let lineCell = collectionView.dequeueReusableCell(withReuseIdentifier: LineViewCell.identifier, for: indexPath) as? LineViewCell else { return nil }
-//        guard let title = cellData.title else { return nil }
-//        
-//        gridCell.configure(with: title)
-//        lineCell.configure(with: title)
-//        
-        //        self.configureSnapshot(with: [cellData])
+        guard let item = item, let title = item.title else { return nil }
         
-        return self.isTable ? lineCell : gridCell
+        switch self.viewType {
+        case .grid:
+            guard let gridCell = collectionView
+                .dequeueReusableCell(withReuseIdentifier: GridViewCell.identifier, for: indexPath) as? GridViewCell else { return nil }
+            if let folder = item as? Folder {
+                gridCell.configure(with: title, image: "folder")
+            } else if let file = item as? File {
+                gridCell.configure(with: title, image: "doc.richtext")
+            }
+            collectionView.reloadData()
+            return gridCell
+        case .list:
+            guard let lineCell = collectionView
+                .dequeueReusableCell(withReuseIdentifier: LineViewCell.identifier, for: indexPath) as? LineViewCell else { return nil }
+            if let folder = item as? Folder {
+                lineCell.configure(with: title, image: "folder")
+            } else if let file = item as? File {
+                lineCell.configure(with: title, image: "doc.richtext")
+            }
+            collectionView.reloadData()
+            return lineCell
+        }
     }
+    
+    private lazy var listViewLayout: UICollectionViewFlowLayout = {
+        
+        let collectionFlowLayout = UICollectionViewFlowLayout()
+        collectionFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+        collectionFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 80)
+        collectionFlowLayout.minimumInteritemSpacing = 0
+        collectionFlowLayout.minimumLineSpacing = 0
+        collectionFlowLayout.scrollDirection = .vertical
+        return collectionFlowLayout
+    }()
+    
+    private lazy var gridViewLayout: UICollectionViewFlowLayout = {
+        
+        let collectionFlowLayout = UICollectionViewFlowLayout()
+        collectionFlowLayout.scrollDirection = .vertical
+        collectionFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
+        collectionFlowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 80) / 2 , height: UIScreen.main.bounds.height*0.16)
+        collectionFlowLayout.minimumInteritemSpacing = 20
+        collectionFlowLayout.minimumLineSpacing = 20
+        return collectionFlowLayout
+    }()
     
     private var viewModel: FolderViewModelProvider
     
@@ -97,11 +132,12 @@ class FolderViewController: UIViewController {
         setupAutoLayout()
     }
     
-    private func createCompositionalLayout() -> UICollectionViewCompositionalLayout {
+    private func createGridCompositionalLayout() -> UICollectionViewCompositionalLayout {
         let fraction: CGFloat = 1 / 3
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fraction), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(fraction))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -113,12 +149,10 @@ class FolderViewController: UIViewController {
     private func bind() {
         viewModel.updateAction = { [weak dataSource] snapshot in
             guard let dataSource = dataSource else { return }
-//            var snapshot: ItemsFetcherSnapshot = data
-//            snapshot.appendItems(data)
+
             DispatchQueue.main.async {
                 dataSource.apply(snapshot)
             }
-
         }
     }
     
@@ -145,17 +179,31 @@ class FolderViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-    
-    //    private func configureSnapshot(with data: [Item]) {
-    //        var snapshot = ItemsFetcherSnapshot()
-    //        snapshot.appendSections([0])
-    //        snapshot.appendItems(data, toSection: 0)
-    //        dataSource.apply(snapshot)
-    //    }
+
+    private func applyCollectionViewLayout(_ viewType: ViewType) -> UICollectionViewLayout {
+        switch viewType {
+        case .grid:
+            return gridViewLayout
+        case .list:
+            return listViewLayout
+        }
+    }
     
     @objc private func toggleSwitcher(sender: UIBarButtonItem) {
-        isTable.toggle()
-        sender.image = isTable ? UIImage(systemName: "list.bullet") : UIImage(systemName: "square.grid.2x2")
+        if viewType == .grid {
+            viewType = .list
+        } else {
+            viewType = .grid
+        }
+        
+        switch viewType {
+        case .grid:
+            collectionView.setCollectionViewLayout(gridViewLayout, animated: true)
+            sender.image = UIImage(systemName: "square.grid.2x2")
+        case .list:
+            collectionView.setCollectionViewLayout(listViewLayout, animated: true)
+            sender.image = UIImage(systemName: "list.bullet")
+        }
     }
 }
 

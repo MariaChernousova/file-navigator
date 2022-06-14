@@ -1,5 +1,5 @@
 //
-//  GridViewCell.swift
+//  LineViewCell.swift
 //  file-manager
 //
 //  Created by Chernousova Maria on 10.06.2022.
@@ -7,13 +7,15 @@
 
 import UIKit
 
-class GridViewCell: UICollectionViewCell {
+class LineViewCell: UICollectionViewCell {
     private enum Constant {
         
     }
     
     private lazy var typeImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -41,27 +43,26 @@ class GridViewCell: UICollectionViewCell {
         contentView.addSubview(typeImageView)
         contentView.addSubview(titleLabel)
     }
-    
+
     private func setupAutoLayout() {
         typeImageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             typeImageView.widthAnchor.constraint(equalToConstant: 44),
-            typeImageView.heightAnchor.constraint(equalToConstant: 44),
             typeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             typeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             typeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             
-            titleLabel.topAnchor.constraint(equalTo: typeImageView.topAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: typeImageView.trailingAnchor, constant: 8),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
+            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -8)
         ])
     }
     
-    func configure(with title: String) {
+    func configure(with title: String, image: String) {
         titleLabel.text = title
-        typeImageView.image = UIImage(systemName: "folder")
+        typeImageView.image = UIImage(systemName: image)
     }
 }

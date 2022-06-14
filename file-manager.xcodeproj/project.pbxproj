@@ -96,8 +96,7 @@
 		A989EF8C28533F3400E359BF /* Folder */ = {
 			isa = PBXGroup;
 			children = (
-				A989EFB62853D21200E359BF /* LineViewCell.swift */,
-				A989EFB82853D2C900E359BF /* GridViewCell.swift */,
+				A989EFEE2859313600E359BF /* Components */,
 				A989EF902853403F00E359BF /* FolderViewController.swift */,
 				A989EF922853406D00E359BF /* FolderViewModel.swift */,
 				A989EF942853407700E359BF /* FolderModel.swift */,
@@ -172,6 +171,15 @@
 				A989EFD4285895C100E359BF /* NSObject+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A989EFEE2859313600E359BF /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A989EFB62853D21200E359BF /* LineViewCell.swift */,
+				A989EFB82853D2C900E359BF /* GridViewCell.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		A9975AA4284E922500618AE6 = {
