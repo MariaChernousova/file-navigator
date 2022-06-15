@@ -42,6 +42,10 @@ class LineViewCell: UICollectionViewCell {
     private func setupSubviews() {
         contentView.addSubview(typeImageView)
         contentView.addSubview(titleLabel)
+        
+        layer.borderColor = UIColor.systemGray.cgColor
+        layer.borderWidth = 0.5
+        layer.cornerRadius = 10
     }
 
     private func setupAutoLayout() {
@@ -49,7 +53,7 @@ class LineViewCell: UICollectionViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            typeImageView.widthAnchor.constraint(equalToConstant: 44),
+            typeImageView.widthAnchor.constraint(lessThanOrEqualToConstant: 44),
             typeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             typeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             typeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
@@ -57,7 +61,6 @@ class LineViewCell: UICollectionViewCell {
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: typeImageView.trailingAnchor, constant: 8),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            titleLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: -8)
         ])
     }
     

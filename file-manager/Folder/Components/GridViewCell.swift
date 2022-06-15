@@ -59,7 +59,7 @@ class GridViewCell: UICollectionViewCell {
             typeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             typeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
-            titleLabel.heightAnchor.constraint(equalToConstant: 44),
+            titleLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 44),
             titleLabel.topAnchor.constraint(equalTo: typeImageView.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),

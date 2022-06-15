@@ -86,28 +86,6 @@ class FolderViewController: UIViewController {
         }
     }
     
-    private lazy var listViewLayout: UICollectionViewFlowLayout = {
-        
-        let collectionFlowLayout = UICollectionViewFlowLayout()
-        collectionFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
-        collectionFlowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 80)
-        collectionFlowLayout.minimumInteritemSpacing = 0
-        collectionFlowLayout.minimumLineSpacing = 0
-        collectionFlowLayout.scrollDirection = .vertical
-        return collectionFlowLayout
-    }()
-    
-    private lazy var gridViewLayout: UICollectionViewFlowLayout = {
-        
-        let collectionFlowLayout = UICollectionViewFlowLayout()
-        collectionFlowLayout.scrollDirection = .vertical
-        collectionFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30)
-        collectionFlowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 80) / 2 , height: UIScreen.main.bounds.height*0.16)
-        collectionFlowLayout.minimumInteritemSpacing = 20
-        collectionFlowLayout.minimumLineSpacing = 20
-        return collectionFlowLayout
-    }()
-    
     private var viewModel: FolderViewModelProvider
     
     init(viewModel: FolderViewModelProvider) {
@@ -133,17 +111,42 @@ class FolderViewController: UIViewController {
     }
     
     private func createGridCompositionalLayout() -> UICollectionViewCompositionalLayout {
-        let fraction: CGFloat = 1 / 3
-        
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(fraction), heightDimension: .fractionalHeight(1))
+        let spacing: CGFloat = 8
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 4, bottom: 4, trailing: 4)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(fraction))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(1/3))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+        group.interItemSpacing = .fixed(spacing)
         
         let section = NSCollectionLayoutSection(group: group)
-        return UICollectionViewCompositionalLayout(section: section)
+        section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        section.interGroupSpacing = spacing
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    private func createLineCompositionalLayout() -> UICollectionViewCompositionalLayout {
+        let spacing: CGFloat = 8
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                              heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .absolute(44))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        section.interGroupSpacing = spacing
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
     }
     
     private func bind() {
@@ -183,9 +186,9 @@ class FolderViewController: UIViewController {
     private func applyCollectionViewLayout(_ viewType: ViewType) -> UICollectionViewLayout {
         switch viewType {
         case .grid:
-            return gridViewLayout
+            return createGridCompositionalLayout()
         case .list:
-            return listViewLayout
+            return createLineCompositionalLayout()
         }
     }
     
@@ -198,10 +201,10 @@ class FolderViewController: UIViewController {
         
         switch viewType {
         case .grid:
-            collectionView.setCollectionViewLayout(gridViewLayout, animated: true)
+            collectionView.setCollectionViewLayout(createGridCompositionalLayout(), animated: true)
             sender.image = UIImage(systemName: "square.grid.2x2")
         case .list:
-            collectionView.setCollectionViewLayout(listViewLayout, animated: true)
+            collectionView.setCollectionViewLayout(createLineCompositionalLayout(), animated: true)
             sender.image = UIImage(systemName: "list.bullet")
         }
     }
