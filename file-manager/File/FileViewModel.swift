@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+protocol FileViewModelProvider {
+    var file: File { get }
+}
+
+class FileViewModel: FileViewModelProvider {
+    var file: File
+    let model: FileModelProvider
+    
+    init(file: File, model: FileModelProvider) {
+        self.file = file
+        self.model = model
+    }
+}

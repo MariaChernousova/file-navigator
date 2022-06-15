@@ -12,6 +12,7 @@ protocol FolderViewModelProvider {
     
     func didLoad()
     func object(at indexPath: IndexPath) -> Item?
+    func select(at indexPath: IndexPath)
 }
 
 class FolderViewModel: FolderViewModelProvider {
@@ -59,6 +60,16 @@ class FolderViewModel: FolderViewModelProvider {
     
     func object(at indexPath: IndexPath) -> Item? {
         model.object(at: indexPath)
+    }
+    
+    func select(at indexPath: IndexPath) {
+        let item = object(at: indexPath)
+        if let folder = item as? Folder {
+            guard let id = folder.id else { return }
+            pathHandler(.folder(id: id))
+        } else if let file = item as? File {
+            pathHandler(.file(file: file))
+        }
     }
     
     // MARK: - Private methods.

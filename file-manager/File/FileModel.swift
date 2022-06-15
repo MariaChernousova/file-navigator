@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+protocol FileModelProvider {
+    
+}
+
+class FileModel: FileModelProvider {
+
+}

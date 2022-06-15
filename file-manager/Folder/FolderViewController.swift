@@ -170,6 +170,7 @@ class FolderViewController: UIViewController {
         collectionView.register(LineViewCell.self, forCellWithReuseIdentifier: LineViewCell.identifier)
         
         collectionView.dataSource = dataSource
+        collectionView.delegate = self
     }
     
     private func setupAutoLayout() {
@@ -210,3 +211,8 @@ class FolderViewController: UIViewController {
     }
 }
 
+extension FolderViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.select(at: indexPath)
+    }
+}
