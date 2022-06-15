@@ -2,7 +2,7 @@
 //  File+CoreDataProperties.swift
 //  file-manager
 //
-//  Created by Chernousova Maria on 14.06.2022.
+//  Created by Eric Golovin on 6/16/22.
 //
 //
 

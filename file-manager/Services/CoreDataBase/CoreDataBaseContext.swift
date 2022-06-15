@@ -12,4 +12,5 @@ protocol CoreDataBaseContext {
     var context: NSManagedObjectContext { get }
     
     func saveContext(completionHandler: ((Result<Bool, CoreDataStackError>) -> Void)?)
+    func fetchSingle<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>) -> Result<T, CoreDataStackError>
 }

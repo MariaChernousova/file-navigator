@@ -63,11 +63,9 @@ class NetworkManager: NetworkManagerContext {
             
             do {
                 let spreadsheet = try JSONDecoder().decode(SpreadSheet.self, from: data!)
-                print(spreadsheet)
                 
                 completionHandler(.success(spreadsheet))
             } catch let error {
-                print(error.localizedDescription)
                 
                 completionHandler(.failure(error))
             }

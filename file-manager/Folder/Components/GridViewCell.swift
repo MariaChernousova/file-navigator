@@ -12,6 +12,10 @@ class GridViewCell: UICollectionViewCell {
         
     }
     
+    var tapHandler: (() -> Void)?
+    
+    private lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureDidTrigger))
+    
     private lazy var typeImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.contentMode = .scaleAspectFit
@@ -42,6 +46,7 @@ class GridViewCell: UICollectionViewCell {
     }
     
     private func setupSubviews() {
+        contentView.addGestureRecognizer(tapGestureRecognizer)
         contentView.addSubview(typeImageView)
         contentView.addSubview(titleLabel)
                 
@@ -70,5 +75,9 @@ class GridViewCell: UICollectionViewCell {
     func configure(with title: String, image: String) {
         titleLabel.text = title
         typeImageView.image = UIImage(systemName: image)
+    }
+    
+    @objc private func tapGestureDidTrigger() {
+        tapHandler?()
     }
 }

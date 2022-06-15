@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class DataManager: DataManagerContext {
     
@@ -57,7 +58,17 @@ class DataManager: DataManagerContext {
         let item: Item
         switch row.item {
         case .file:
-            let file = File(context: coreDataBase.context)
+            let fetchRequest: NSFetchRequest<File> = File.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "%K == %@", "id", row.id)
+            let file: File = {
+                let result = coreDataBase.fetchSingle(fetchRequest: fetchRequest)
+                switch result {
+                case .success(let file):
+                    return file
+                case .failure:
+                    return File(context: coreDataBase.context)
+                }
+            }()
             file.id = row.id
             file.title = row.title
             file.parentItem = parentFolder
@@ -69,7 +80,17 @@ class DataManager: DataManagerContext {
             
             item = file
         case .folder:
-            let folder = Folder(context: coreDataBase.context)
+            let fetchRequest: NSFetchRequest<Folder> = Folder.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "%K == %@", "id", row.id)
+            let folder: Folder = {
+                let result = coreDataBase.fetchSingle(fetchRequest: fetchRequest)
+                switch result {
+                case .success(let folder):
+                    return folder
+                case .failure:
+                    return Folder(context: coreDataBase.context)
+                }
+            }()
             folder.id = row.id
             folder.title = row.title
             folder.parentItem = parentFolder
