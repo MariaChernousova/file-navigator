@@ -58,30 +58,33 @@ class FolderViewController: UIViewController {
         action: #selector(toggleSwitcher)
     )
     
-    private lazy var dataSource = ItemsFetcherDataSource(collectionView: collectionView) { collectionView, indexPath, cellData -> UICollectionViewCell? in
-        let item = self.viewModel.object(at: indexPath)
-        guard let item = item, let title = item.title else { return nil }
-        
+    private lazy var dataSource = ItemsResultDataSource(collectionView: collectionView) { collectionView, indexPath, itemAdapter -> UICollectionViewCell? in
         switch self.viewType {
         case .grid:
             guard let gridCell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: GridViewCell.identifier, for: indexPath) as? GridViewCell else { return nil }
-            if let folder = item as? Folder {
-                gridCell.configure(with: title, image: "folder")
-            } else if let file = item as? File {
-                gridCell.configure(with: title, image: "doc.richtext")
+            if let folder = itemAdapter as? FolderAdapter {
+                gridCell.configure(with: itemAdapter.title, image: "folder")
+            } else if let file = itemAdapter as? FileAdapter {
+                gridCell.configure(with: itemAdapter.title, image: "doc.richtext")
             }
-            collectionView.reloadData()
+            gridCell.tapHandler = {
+                self.viewModel.select(item: itemAdapter)
+            }
+//            collectionView.reloadData()
             return gridCell
         case .list:
             guard let lineCell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: LineViewCell.identifier, for: indexPath) as? LineViewCell else { return nil }
-            if let folder = item as? Folder {
-                lineCell.configure(with: title, image: "folder")
-            } else if let file = item as? File {
-                lineCell.configure(with: title, image: "doc.richtext")
+            if let folder = itemAdapter as? FolderAdapter {
+                lineCell.configure(with: itemAdapter.title, image: "folder")
+            } else if let file = itemAdapter as? FileAdapter {
+                lineCell.configure(with: itemAdapter.title, image: "doc.richtext")
             }
-            collectionView.reloadData()
+            lineCell.tapHandler = {
+                self.viewModel.select(item: itemAdapter)
+            }
+//            collectionView.reloadData()
             return lineCell
         }
     }
@@ -101,8 +104,9 @@ class FolderViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         commonInit()
-        viewModel.didLoad()
         bind()
+        
+        viewModel.didLoad()
     }
     
     private func commonInit() {
@@ -150,9 +154,8 @@ class FolderViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.updateAction = { [weak dataSource] snapshot in
+        viewModel.setUpdateHandler { [weak dataSource] snapshot in
             guard let dataSource = dataSource else { return }
-
             DispatchQueue.main.async {
                 dataSource.apply(snapshot)
             }
@@ -170,6 +173,7 @@ class FolderViewController: UIViewController {
         collectionView.register(LineViewCell.self, forCellWithReuseIdentifier: LineViewCell.identifier)
         
         collectionView.dataSource = dataSource
+//        collectionView.delegate = self
     }
     
     private func setupAutoLayout() {
@@ -201,12 +205,28 @@ class FolderViewController: UIViewController {
         
         switch viewType {
         case .grid:
-            collectionView.setCollectionViewLayout(createGridCompositionalLayout(), animated: true)
+            collectionView.setCollectionViewLayout(createGridCompositionalLayout(), animated: true) { _ in
+                var snapshot = self.dataSource.snapshot()
+                let identifiers = snapshot.sectionIdentifiers
+                snapshot.reloadSections(identifiers)
+                self.dataSource.apply(snapshot)
+            }
             sender.image = UIImage(systemName: "square.grid.2x2")
         case .list:
-            collectionView.setCollectionViewLayout(createLineCompositionalLayout(), animated: true)
+            collectionView.setCollectionViewLayout(createLineCompositionalLayout(), animated: true) { _ in
+                var snapshot = self.dataSource.snapshot()
+                let identifiers = snapshot.sectionIdentifiers
+                snapshot.reloadSections(identifiers)
+                self.dataSource.apply(snapshot)
+            }
             sender.image = UIImage(systemName: "list.bullet")
         }
     }
 }
-
+//
+//extension FolderViewController: UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
+//        viewModel.select(item: selectedItem)
+//    }
+//}

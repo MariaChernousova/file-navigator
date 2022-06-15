@@ -36,6 +36,14 @@ extension ServiceLocator: ServiceManager {
         return itemsFetcher
     }
     
+    var fileFetcher: FileFetcherContext {
+        guard let fileFetcher: FileFetcherContext = resolve() else {
+            fatalError(.init(format: Const.errorMessage,
+                             arguments: [String(describing: FileFetcherContext.self)]))
+        }
+        return fileFetcher
+    }
+    
     var networkManager: NetworkManagerContext {
         guard let networkManager: NetworkManagerContext = resolve() else {
             fatalError(.init(format: Const.errorMessage,

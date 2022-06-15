@@ -25,7 +25,7 @@ class FolderCoordinator: Coordinator {
     
     func start() {
         let model = FolderModel(serviceManager: serviceManager)
-        let viewModel = FolderViewModel(model: model) { path in
+        let viewModel = FolderViewModel(folderId: folderId, model: model) { path in
             switch path {
             case .folder(let id):
                 self.startFolderFlow(with: id)
@@ -44,6 +44,6 @@ class FolderCoordinator: Coordinator {
     }
     
     private func startFileFlow(with fileID: String) {
-        
+        FileCoordinator(serviceManager: serviceManager, rootViewController: rootViewController, fileId: fileID).start()
     }
 }

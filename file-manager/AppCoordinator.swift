@@ -21,6 +21,6 @@ class AppCoordinator: Coordinator {
     }
     
     private func startFoldersCoordinator() {
-        FolderCoordinator(serviceManager: serviceManager, rootViewController: rootViewController, folderId: "").start()
+        FolderCoordinator(serviceManager: serviceManager, rootViewController: rootViewController, folderId: nil).start()
     }
 }

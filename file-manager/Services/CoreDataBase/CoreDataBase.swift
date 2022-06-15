@@ -26,7 +26,7 @@ class CoreDataBase: CoreDataBaseContext {
         let container = NSPersistentContainer(name: self.modelName)
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
-                print("Unresolved error \(error), \(error.userInfo)")
+//                print("Unresolved error \(error), \(error.userInfo)")
             }
         }
         return container
@@ -48,6 +48,20 @@ class CoreDataBase: CoreDataBaseContext {
             try context.execute(asynchronousFetchRequest)
         } catch let error as NSError {
             completionHandler(.failure(.error(error)))
+        }
+    }
+    
+    func fetchSingle<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>) -> Result<T, CoreDataStackError> {
+        fetchRequest.fetchLimit = 1
+        do {
+            let result = try context.fetch(fetchRequest)
+            if let firstObject = result.first {
+                return .success(firstObject)
+            } else {
+                return .failure(.unknown)
+            }
+        } catch let error as NSError {
+            return .failure(.error(error))
         }
     }
     
