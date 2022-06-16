@@ -73,7 +73,7 @@ class FolderViewModel: FolderViewModelProvider {
         if let folder = item as? FolderAdapter {
             pathHandler(.folder(id: folder.id))
         } else if let file = item as? FileAdapter {
-//            pathHandler(.file(file: fil))
+            pathHandler(.file(id: file.id))
         }
     }
     

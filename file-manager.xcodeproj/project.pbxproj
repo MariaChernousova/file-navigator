@@ -30,6 +30,11 @@
 		A989EFD028577D0F00E359BF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFCF28577D0F00E359BF /* DataManager.swift */; };
 		A989EFD228577D1B00E359BF /* DataManagerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFD128577D1B00E359BF /* DataManagerContext.swift */; };
 		A989EFD5285895C100E359BF /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFD4285895C100E359BF /* NSObject+Extensions.swift */; };
+		A989EFF0285B29EB00E359BF /* FileAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFEF285B29EB00E359BF /* FileAdapter.swift */; };
+		A989EFF2285B2A1400E359BF /* FolderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF1285B2A1400E359BF /* FolderAdapter.swift */; };
+		A989EFF4285B2A2D00E359BF /* ItemAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF3285B2A2D00E359BF /* ItemAdapter.swift */; };
+		A989EFF6285B5A1B00E359BF /* FileFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF5285B5A1B00E359BF /* FileFetcher.swift */; };
+		A989EFF9285B70C800E359BF /* FileFetcherContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF8285B70C800E359BF /* FileFetcherContext.swift */; };
 		A9975AB1284E922500618AE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB0284E922500618AE6 /* AppDelegate.swift */; };
 		A9975AB3284E922500618AE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB2284E922500618AE6 /* SceneDelegate.swift */; };
 		A9975ABB284E922500618AE6 /* file_manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB9284E922500618AE6 /* file_manager.xcdatamodeld */; };
@@ -69,6 +74,11 @@
 		A989EFCF28577D0F00E359BF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		A989EFD128577D1B00E359BF /* DataManagerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerContext.swift; sourceTree = "<group>"; };
 		A989EFD4285895C100E359BF /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
+		A989EFEF285B29EB00E359BF /* FileAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAdapter.swift; sourceTree = "<group>"; };
+		A989EFF1285B2A1400E359BF /* FolderAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAdapter.swift; sourceTree = "<group>"; };
+		A989EFF3285B2A2D00E359BF /* ItemAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAdapter.swift; sourceTree = "<group>"; };
+		A989EFF5285B5A1B00E359BF /* FileFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFetcher.swift; sourceTree = "<group>"; };
+		A989EFF8285B70C800E359BF /* FileFetcherContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFetcherContext.swift; sourceTree = "<group>"; };
 		A9975AAD284E922500618AE6 /* file-manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "file-manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9975AB0284E922500618AE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9975AB2284E922500618AE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,7 +115,6 @@
 				A989EF922853406D00E359BF /* FolderViewModel.swift */,
 				A989EF942853407700E359BF /* FolderModel.swift */,
 				A989EF962853408300E359BF /* FolderCoordinator.swift */,
-				E9F9AA2A285A70CF00A01307 /* ItemsResultController.swift */,
 			);
 			path = Folder;
 			sourceTree = "<group>";
@@ -186,6 +195,25 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		A989EFF7285B70A500E359BF /* FileFetcher */ = {
+			isa = PBXGroup;
+			children = (
+				A989EFF5285B5A1B00E359BF /* FileFetcher.swift */,
+				A989EFF8285B70C800E359BF /* FileFetcherContext.swift */,
+			);
+			path = FileFetcher;
+			sourceTree = "<group>";
+		};
+		A989EFFA285B718B00E359BF /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				A989EFF3285B2A2D00E359BF /* ItemAdapter.swift */,
+				A989EFF1285B2A1400E359BF /* FolderAdapter.swift */,
+				A989EFEF285B29EB00E359BF /* FileAdapter.swift */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
 		A9975AA4284E922500618AE6 = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +266,8 @@
 		E9F9AA22285A700D00A01307 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				A989EFFA285B718B00E359BF /* Adapters */,
+				A989EFF7285B70A500E359BF /* FileFetcher */,
 				E9F9AA27285A709100A01307 /* ResultController */,
 				E9F9AA23285A702600A01307 /* ItemsFetchers */,
 			);
@@ -257,6 +287,7 @@
 			isa = PBXGroup;
 			children = (
 				67E3C2D52857AF3600545FBD /* ResultControllerContext.swift */,
+				E9F9AA2A285A70CF00A01307 /* ItemsResultController.swift */,
 			);
 			path = ResultController;
 			sourceTree = "<group>";
@@ -341,8 +372,11 @@
 				E9F9AA32285A822A00A01307 /* Folder+CoreDataClass.swift in Sources */,
 				A989EFA12853436600E359BF /* AppCoordinator.swift in Sources */,
 				A989EFA9285345F300E359BF /* CoreDataBase.swift in Sources */,
+				A989EFF0285B29EB00E359BF /* FileAdapter.swift in Sources */,
 				A989EF99285340F700E359BF /* FileViewController.swift in Sources */,
+				A989EFF4285B2A2D00E359BF /* ItemAdapter.swift in Sources */,
 				E9F9AA2B285A70CF00A01307 /* ItemsResultController.swift in Sources */,
+				A989EFF9285B70C800E359BF /* FileFetcherContext.swift in Sources */,
 				E9F9AA34285A822A00A01307 /* File+CoreDataClass.swift in Sources */,
 				67E3C2E42857ED1F00545FBD /* ItemsFetcher.swift in Sources */,
 				E9F9AA33285A822A00A01307 /* Folder+CoreDataProperties.swift in Sources */,
@@ -353,8 +387,10 @@
 				E9F9AA35285A822A00A01307 /* File+CoreDataProperties.swift in Sources */,
 				A989EFB528534DDE00E359BF /* NetworkManagerContext.swift in Sources */,
 				A9975ABB284E922500618AE6 /* file_manager.xcdatamodeld in Sources */,
+				A989EFF2285B2A1400E359BF /* FolderAdapter.swift in Sources */,
 				A989EFD028577D0F00E359BF /* DataManager.swift in Sources */,
 				A989EF9B2853410800E359BF /* FileViewModel.swift in Sources */,
+				A989EFF6285B5A1B00E359BF /* FileFetcher.swift in Sources */,
 				A989EF9F2853411E00E359BF /* FileCoordinator.swift in Sources */,
 				A989EFAF28534DAC00E359BF /* ServiceLocator.swift in Sources */,
 				A989EFAB2853460300E359BF /* CoreDataBaseContext.swift in Sources */,

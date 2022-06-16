@@ -2,7 +2,7 @@
 //  ItemsResultController.swift
 //  file-manager
 //
-//  Created by Eric Golovin on 6/15/22.
+//  Created by Chernousova Maria on 15.06.2022.
 //
 
 import UIKit
@@ -13,59 +13,8 @@ typealias ItemsResultSnapshot = NSDiffableDataSourceSnapshot<Section, ItemAdapte
 
 typealias ItemsResultUpdateHandler = (ItemsResultSnapshot) -> Void
 
-class FileAdapter: ItemAdapter {
-    
-    let nameExtension: String?
-    
-    init(file: File) {
-        nameExtension = file.nameExtension
-        super.init(item: file)
-    }
-}
-
 enum Section: Int {
     case main
-}
-
-class FolderAdapter: ItemAdapter {
-    
-    let itemIdentifiers: [String]
-    
-    init(folder: Folder) {
-        if let folderItems = folder.items?.array as? [Item] {
-            itemIdentifiers = folderItems.compactMap { $0.id }
-        } else {
-            itemIdentifiers = []
-        }
-        super.init(item: folder)
-    }
-}
-
-class ItemAdapter {
-    
-    let id: String
-    let title: String
-    let parentItemIdentifiers: String?
-    
-    init(item: Item) {
-        id = item.id ?? ""
-        title = item.title ?? ""
-        if let itemParentItem = item.parentItem {
-            parentItemIdentifiers = itemParentItem.id
-        } else {
-            parentItemIdentifiers = nil
-        }
-    }
-}
-
-extension ItemAdapter: Hashable {
-    static func == (lhs: ItemAdapter, rhs: ItemAdapter) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
 }
 
 class ItemsResultController: NSObject, ResultControllerContext {

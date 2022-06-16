@@ -2,7 +2,7 @@
 //  ItemsFetcherContext.swift
 //  file-manager
 //
-//  Created by Eric Golovin on 6/15/22.
+//  Created by Chernousova Maria on 15.06.2022.
 //
 
 import Foundation

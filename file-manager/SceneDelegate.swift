@@ -40,6 +40,8 @@ extension SceneDelegate {
         
         let itemsFetcher: ItemsFetcherContext = ItemsFetcher(coreDataBaseContext: coreDataBase)
         serviceLocator.register(itemsFetcher)
+        let fileFetcher: FileFetcherContext = FileFetcher(coreDataBase: coreDataBase)
+        serviceLocator.register(fileFetcher)
         let dataManager: DataManagerContext = DataManager(coreDataBase: coreDataBase)
         serviceLocator.register(dataManager)
     }

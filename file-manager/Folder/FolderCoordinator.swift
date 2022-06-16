@@ -10,7 +10,7 @@ import UIKit
 class FolderCoordinator: Coordinator {
     enum Path {
         case folder(id: String)
-        case file(file: File)
+        case file(id: String)
     }
     
     let serviceManager: ServiceManager
@@ -29,8 +29,8 @@ class FolderCoordinator: Coordinator {
             switch path {
             case .folder(let id):
                 self.startFolderFlow(with: id)
-            case .file(let file):
-                self.startFileFlow(with: file)
+            case .file(let id):
+                self.startFileFlow(with: id)
             }
         }
         
@@ -43,7 +43,7 @@ class FolderCoordinator: Coordinator {
         FolderCoordinator(serviceManager: serviceManager, rootViewController: rootViewController, folderId: folderID).start()
     }
     
-    private func startFileFlow(with file: File) {
-        FileCoordinator(serviceManager: serviceManager, rootViewController: rootViewController, file: file).start()
+    private func startFileFlow(with fileID: String) {
+        FileCoordinator(serviceManager: serviceManager, rootViewController: rootViewController, fileId: fileID).start()
     }
 }

@@ -10,17 +10,17 @@ import UIKit
 class FileCoordinator: Coordinator {
     var serviceManager: ServiceManager
     var rootViewController: UINavigationController
-    private let file: File
+    private let fileId: String
     
-    init(serviceManager: ServiceManager, rootViewController: UINavigationController, file: File) {
+    init(serviceManager: ServiceManager, rootViewController: UINavigationController, fileId: String) {
         self.serviceManager = serviceManager
         self.rootViewController = rootViewController
-        self.file = file
+        self.fileId = fileId
     }
     
     func start() {
-        let model = FileModel()
-        let viewModel = FileViewModel(file: file, model: model)
+        let model = FileModel(serviceManager: serviceManager)
+        let viewModel = FileViewModel(fileId: fileId, model: model)
         let viewController = FileViewController(viewModel: viewModel)
         
         rootViewController.pushViewController(viewController, animated: true)

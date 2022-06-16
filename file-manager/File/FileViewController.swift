@@ -19,7 +19,6 @@ class FileViewController: UIViewController {
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.text = viewModel.file.title
         label.textAlignment = .center
         return label
     }()
@@ -47,6 +46,8 @@ class FileViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         commonInit()
+        viewModel.didLoad()
+        configure()
     }
     
     private func commonInit() {
@@ -74,5 +75,10 @@ class FileViewController: UIViewController {
             titleLabel.trailingAnchor.constraint(equalTo: fileImageView.trailingAnchor),
 
         ])
+    }
+    
+    func configure() {
+        guard let title = viewModel.file?.title else { return }
+        titleLabel.text = title
     }
 }
