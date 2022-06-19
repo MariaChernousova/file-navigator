@@ -5,71 +5,94 @@
 //  Created by Chernousova Maria on 13.06.2022.
 //
 
-import Foundation
 import CoreData
 
 class DataManager: DataManagerContext {
     
-    let coreDataBase: CoreDataBaseContext
+    typealias CoreDataBase = CoreDataBaseContext & RestrictedCoreDataBaseContext
     
-    init(coreDataBase: CoreDataBaseContext) {
+    let coreDataBase: CoreDataBase
+    let managedObjectBuilder: ManagedObjectBuilderContext
+    let folderManipulator: RestrictedFolderManipulatorContext
+    let fileManipulator: RestrictedFileManipulatorContext
+    
+    init(coreDataBase: CoreDataBase,
+         managedObjectBuilder: ManagedObjectBuilderContext,
+         folderManipulator: RestrictedFolderManipulatorContext,
+         fileManipulator: RestrictedFileManipulatorContext) {
         self.coreDataBase = coreDataBase
+        self.managedObjectBuilder = managedObjectBuilder
+        self.folderManipulator = folderManipulator
+        self.fileManipulator = fileManipulator
     }
     
-    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, CoreDataStackError>) -> Void)) {
-        let homeFolderId = UUID().uuidString
-        let homeFolder = Folder(context: coreDataBase.context)
-        homeFolder.id = homeFolderId
-        homeFolder.parentItem = nil
-        homeFolder.title = "/"
-        homeFolder.items = []
-        
-        var parentIdItems: [String: [SpreadSheet.Row]] = [:]
-        
-        for row in rows {
-            guard let parentId = row.parentId else { continue }
-            if var rows = parentIdItems[parentId] {
-                rows.append(row)
-                parentIdItems[parentId] = rows
-            } else {
-                parentIdItems[parentId] = [row]
-            }
+    func saveData(rows: [SpreadSheet.Row],
+                  completionHandler: @escaping ((Result<String, AppError>) -> Void)) {
+        DispatchQueue.main.async {
+            self.startParsing(rows: rows, completionHandler: completionHandler)
         }
-        
-        for row in rows where row.parentId == nil {
-            let item = parse(row: row, parentFolder: homeFolder, dataItems: parentIdItems)
-            homeFolder.addToItems(item)
-        }
-        
-        coreDataBase.saveContext { result in
-            switch result {
-            case .success(let success):
-                if success {
-                    completionHandler(.success(homeFolderId))
+    }
+    
+    private func startParsing(rows: [SpreadSheet.Row],
+                    completionHandler: @escaping ((Result<String, AppError>) -> Void)) {
+            let homeFolder: Folder = {
+                let result = self.folderManipulator.fetchFolder(ID: nil)
+                switch result {
+                case .success(let folder):
+                    return folder
+                case .failure:
+                    let data = FolderData(id: UUID().uuidString, title: "/")
+                    return self.managedObjectBuilder.buildFolder(data, context: coreDataBase.mainContext)
                 }
-            case .failure(let error):
-                completionHandler(.failure(error))
+            }()
+            homeFolder.title = "/"
+            homeFolder.parentItem = nil
+            
+            let homeFolderId = homeFolder.id ?? nil
+            
+            var parentIdItems: [String: [SpreadSheet.Row]] = [:]
+            
+            for row in rows {
+                guard let parentId = row.parentId else { continue }
+                if var rows = parentIdItems[parentId] {
+                    rows.append(row)
+                    parentIdItems[parentId] = rows
+                } else {
+                    parentIdItems[parentId] = [row]
+                }
             }
-        }
-        
+            
+            for row in rows where row.parentId == nil {
+                let item = self.parse(row: row, parentFolder: homeFolder, dataItems: parentIdItems, context: coreDataBase.mainContext)
+                homeFolder.addToItems(item)
+            }
+            
+            self.coreDataBase.saveContext { result in
+                switch result {
+                case .none:
+                    guard let homeFolderId = homeFolderId else { return }
+                        completionHandler(.success(homeFolderId))
+                case .some(let error):
+                    completionHandler(.failure(AppError(error)))
+                }
+            }
     }
     
-    func parse(row: SpreadSheet.Row, parentFolder: Folder, dataItems: [String: [SpreadSheet.Row]]) -> Item {
+    private func parse(row: SpreadSheet.Row, parentFolder: Folder, dataItems: [String: [SpreadSheet.Row]], context: NSManagedObjectContext) -> Item {
         let item: Item
         switch row.item {
         case .file:
-            let fetchRequest: NSFetchRequest<File> = File.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "%K == %@", "id", row.id)
             let file: File = {
-                let result = coreDataBase.fetchSingle(fetchRequest: fetchRequest)
+                let result = fileManipulator.fetchFile(ID: row.id)
                 switch result {
                 case .success(let file):
                     return file
                 case .failure:
-                    return File(context: coreDataBase.context)
+                    let data = FileData(id: row.id, title: row.title, parentItem: parentFolder)
+                    return managedObjectBuilder.buildFile(data, context: coreDataBase.mainContext)
                 }
             }()
-            file.id = row.id
+            
             file.title = row.title
             file.parentItem = parentFolder
             if URL(fileURLWithPath: row.title).lastPathComponent == "" {
@@ -80,26 +103,24 @@ class DataManager: DataManagerContext {
             
             item = file
         case .folder:
-            let fetchRequest: NSFetchRequest<Folder> = Folder.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "%K == %@", "id", row.id)
             let folder: Folder = {
-                let result = coreDataBase.fetchSingle(fetchRequest: fetchRequest)
+                let result = folderManipulator.fetchFolder(ID: row.id)
                 switch result {
                 case .success(let folder):
                     return folder
                 case .failure:
-                    return Folder(context: coreDataBase.context)
+                    let data = FolderData(id: row.id, title: row.title, parentItem: parentFolder)
+                    return managedObjectBuilder.buildFolder(data, context: coreDataBase.mainContext)
                 }
             }()
-            folder.id = row.id
+            
             folder.title = row.title
             folder.parentItem = parentFolder
             
             if let items = dataItems[row.id] {
                 for item in items {
-                    let newItem = parse(row: item, parentFolder: folder, dataItems: dataItems)
+                    let newItem = parse(row: item, parentFolder: folder, dataItems: dataItems, context: coreDataBase.mainContext)
                     folder.addToItems(newItem)
-                    
                 }
             }
             
@@ -109,4 +130,3 @@ class DataManager: DataManagerContext {
         return item
     }
 }
-

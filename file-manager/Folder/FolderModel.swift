@@ -12,18 +12,18 @@ protocol FolderModelProvider {
         using resultController: ItemsResultController,
         parentFolderId: String
     )
-    func loadData(completionHandler: @escaping (Result<SpreadSheet, Error>) -> Void)
-    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, CoreDataStackError>) -> Void))
+    func loadData(completionHandler: @escaping (Result<SpreadSheet, AppError>) -> Void)
+    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, AppError>) -> Void))
 }
 
 class FolderModel: FolderModelProvider {
 
-    private let itemsFetcher: ItemsFetcherContext
+    private let itemsFetcher: ItemManipulatorContext
     private let networkManager: NetworkManagerContext
     private let dataManager: DataManagerContext
       
     init(serviceManager: ServiceManager) {
-        self.itemsFetcher = serviceManager.itemsFetcher
+        self.itemsFetcher = serviceManager.itemManipulator
         self.networkManager = serviceManager.networkManager
         self.dataManager = serviceManager.dataManager
     }
@@ -38,11 +38,11 @@ class FolderModel: FolderModelProvider {
         )
     }
     
-    func loadData(completionHandler: @escaping (Result<SpreadSheet, Error>) -> Void) {
+    func loadData(completionHandler: @escaping (Result<SpreadSheet, AppError>) -> Void) {
         networkManager.loadData(completionHandler: completionHandler)
     }
     
-    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, CoreDataStackError>) -> Void)) {
+    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, AppError>) -> Void)) {
         dataManager.saveData(rows: rows, completionHandler: completionHandler)
     }
 }

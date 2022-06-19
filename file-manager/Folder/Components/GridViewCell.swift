@@ -8,8 +8,13 @@
 import UIKit
 
 class GridViewCell: UICollectionViewCell {
+    
     private enum Constant {
-        
+        static let borderWidth = 0.5
+        static let cornerRadius = 10.0
+        static let typeImageViewInsets = UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
+        static let titleLabelHeight = 44.0
+        static let titleLabelInsets = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     }
     
     var tapHandler: (() -> Void)?
@@ -51,8 +56,8 @@ class GridViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
                 
         layer.borderColor = UIColor.systemGray.cgColor
-        layer.borderWidth = 0.5
-        layer.cornerRadius = 10
+        layer.borderWidth = Constant.borderWidth
+        layer.cornerRadius = Constant.cornerRadius
     }
     
     private func setupAutoLayout() {
@@ -60,15 +65,15 @@ class GridViewCell: UICollectionViewCell {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            typeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            typeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            typeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            typeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constant.typeImageViewInsets.top),
+            typeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constant.typeImageViewInsets.left),
+            typeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constant.typeImageViewInsets.right),
             
-            titleLabel.heightAnchor.constraint(lessThanOrEqualToConstant: 44),
-            titleLabel.topAnchor.constraint(equalTo: typeImageView.bottomAnchor, constant: 8),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
+            titleLabel.heightAnchor.constraint(lessThanOrEqualToConstant: Constant.titleLabelHeight),
+            titleLabel.topAnchor.constraint(equalTo: typeImageView.bottomAnchor, constant: Constant.titleLabelInsets.top),
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constant.titleLabelInsets.left),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constant.titleLabelInsets.bottom),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -Constant.titleLabelInsets.right)
         ])
     }
     

@@ -7,11 +7,21 @@
 
 import UIKit
 
-class FileViewController: UIViewController {
+class FileViewController: BaseViewController {
+    
+    private enum Constant {
+        static let fileImageViewHeightMultiplier = 0.4
+        static let fileImageViewInsets = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 10)
+        static let titleLabelTopAnchor = 10.0
+        
+        static let alertActionTitle = "OK"
+        
+        static let fileImageName = "doc.richtext"
+    }
     
     private lazy var fileImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
-        imageView.image = UIImage(systemName: "doc.richtext")
+        imageView.image = UIImage(systemName: Constant.fileImageName)
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
@@ -21,14 +31,6 @@ class FileViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.textAlignment = .center
         return label
-    }()
-    
-    private lazy var stackView: UIStackView = {
-       let stackView = UIStackView(arrangedSubviews: [fileImageView, titleLabel])
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        stackView.spacing = 10
-        return stackView
     }()
 
     private var viewModel: FileViewModelProvider
@@ -45,9 +47,22 @@ class FileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
         commonInit()
+        bind()
         viewModel.didLoad()
         configure()
+    }
+    
+    private func bind() {
+        
+        viewModel.showErrorAlert = { title, message in
+            self.showAlert(title: title, message: message)
+        }
+        
+        viewModel.updateLoading = { isLoading in
+            self.setLoading(isLoading)
+        }
     }
     
     private func commonInit() {
@@ -65,20 +80,29 @@ class FileViewController: UIViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            fileImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
-            fileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            fileImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            fileImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
+            fileImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constant.fileImageViewHeightMultiplier),
+            fileImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constant.fileImageViewInsets.top),
+            fileImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constant.fileImageViewInsets.left),
+            fileImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constant.fileImageViewInsets.right),
             
-            titleLabel.topAnchor.constraint(equalTo: fileImageView.bottomAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: fileImageView.bottomAnchor, constant: Constant.titleLabelTopAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: fileImageView.leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: fileImageView.trailingAnchor),
-
+            titleLabel.trailingAnchor.constraint(equalTo: fileImageView.trailingAnchor)
         ])
     }
     
-    func configure() {
+    private func configure() {
         guard let title = viewModel.file?.title else { return }
         titleLabel.text = title
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let action = UIAlertAction(title: Constant.alertActionTitle,
+                                   style: .cancel)
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(action)
+        present(alertController, animated: true)
     }
 }

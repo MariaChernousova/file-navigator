@@ -8,6 +8,7 @@
 import UIKit
 
 class FileCoordinator: Coordinator {
+    
     var serviceManager: ServiceManager
     var rootViewController: UINavigationController
     private let fileId: String

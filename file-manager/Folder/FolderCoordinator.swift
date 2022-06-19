@@ -8,6 +8,7 @@
 import UIKit
 
 class FolderCoordinator: Coordinator {
+    
     enum Path {
         case folder(id: String)
         case file(id: String)

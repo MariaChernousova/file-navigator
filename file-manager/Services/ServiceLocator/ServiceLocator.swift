@@ -8,6 +8,7 @@
 import Foundation
 
 class ServiceLocator {
+    
     private var services = [ObjectIdentifier: Any]()
     
     func register<T>(_ service: T) {
@@ -24,24 +25,41 @@ class ServiceLocator {
 }
 
 extension ServiceLocator: ServiceManager {
+    
     private enum Const {
         static let errorMessage = "'%@' cannot be resolved"
     }
     
-    var itemsFetcher: ItemsFetcherContext {
-        guard let itemsFetcher: ItemsFetcherContext = resolve() else {
+    var managedObjectBuilder: ManagedObjectBuilderContext {
+        guard let managedObjectBuilder: ManagedObjectBuilderContext = resolve() else {
             fatalError(.init(format: Const.errorMessage,
-                             arguments: [String(describing: ItemsFetcherContext.self)]))
+                             arguments: [String(describing: ManagedObjectBuilderContext.self)]))
         }
-        return itemsFetcher
+        return managedObjectBuilder
+    }
+
+    var itemManipulator: ItemManipulatorContext {
+        guard let itemManipulator: ItemManipulatorContext = resolve() else {
+            fatalError(.init(format: Const.errorMessage,
+                             arguments: [String(describing: ItemManipulatorContext.self)]))
+        }
+        return itemManipulator
     }
     
-    var fileFetcher: FileFetcherContext {
-        guard let fileFetcher: FileFetcherContext = resolve() else {
+    var folderManipulator: FolderManipulatorContext {
+        guard let folderManipulator: FolderManipulatorContext = resolve() else {
             fatalError(.init(format: Const.errorMessage,
-                             arguments: [String(describing: FileFetcherContext.self)]))
+                             arguments: [String(describing: FolderManipulatorContext.self)]))
         }
-        return fileFetcher
+        return folderManipulator
+    }
+    
+    var fileManipulator: FileManipulatorContext {
+        guard let fileManipulator: FileManipulatorContext = resolve() else {
+            fatalError(.init(format: Const.errorMessage,
+                             arguments: [String(describing: FileManipulatorContext.self)]))
+        }
+        return fileManipulator
     }
     
     var networkManager: NetworkManagerContext {

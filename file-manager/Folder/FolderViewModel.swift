@@ -8,6 +8,8 @@
 import Foundation
 
 protocol FolderViewModelProvider {
+    var showErrorAlert: (_ title: String, _ message: String) -> Void { get set}
+    var updateLoading: (Bool) -> Void { get set }
     func setUpdateHandler(_ updateHandler: @escaping ItemsResultUpdateHandler)
     
     func didLoad()
@@ -24,6 +26,9 @@ class FolderViewModel: FolderViewModelProvider {
     
     private let itemsResultController = ItemsResultController()
     
+    var showErrorAlert: ( _ title: String, _ message: String) -> Void = { _, _ in }
+    var updateLoading: (Bool) -> Void = { _ in }
+    
     init(folderId: String?,
          model: FolderModelProvider,
          pathHandler: @escaping PathHandler) {
@@ -39,16 +44,18 @@ class FolderViewModel: FolderViewModelProvider {
             guard let self = self else { return }
             switch result {
             case .success(let snapshot):
+                self.updateLoading(false)
                 updateHandler(snapshot)
             case .failure(let error):
-                self.handlerError(error: error)
+                self.handlerError(error)
             }
         }
     }
     
     func didLoad() {
+        updateLoading(true)
         if let folderId = folderId {
-            self.fetchRows(with: folderId)
+            fetchRows(with: folderId)
         } else {
             model.loadData { [weak self] result in
                 guard let self = self else { return }
@@ -59,11 +66,11 @@ class FolderViewModel: FolderViewModelProvider {
                         case .success(let homeFolderId):
                             self.fetchRows(with: homeFolderId)
                         case .failure(let error):
-                            print(error)
+                            self.handlerError(error)
                         }
                     }
                 case .failure(let error):
-                    print(error)
+                    self.handlerError(error)
                 }
             }
         }
@@ -79,15 +86,15 @@ class FolderViewModel: FolderViewModelProvider {
     
     // MARK: - Private methods.
     
-    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, CoreDataStackError>) -> Void)) {
+    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, AppError>) -> Void)) {
         model.saveData(rows: rows, completionHandler: completionHandler)
     }
     
     private func fetchRows(with parentFolderId: String) {
-        model.fetchItems(using: itemsResultController, parentFolderId: parentFolderId)
+        model.fetchItems(using: self.itemsResultController, parentFolderId: parentFolderId)
     }
     
-    private func handlerError(error: NSError) {
-        
+    private func handlerError(_ error: AppError) {
+        showErrorAlert(error.title, error.description)
     }
 }

@@ -8,7 +8,9 @@
 import Foundation
 
 protocol FileViewModelProvider {
-    var file: File? { get }
+    var file: FileAdapter? { get }
+    var showErrorAlert: (_ title: String, _ message: String) -> Void { get set}
+    var updateLoading: (Bool) -> Void { get set }
     func didLoad()
 }
 
@@ -16,10 +18,10 @@ class FileViewModel: FileViewModelProvider {
     
     private let fileId: String
     private let model: FileModelProvider
-    
-//    private let itemsResultController = ItemsResultController()
-    
-    var file: File?
+        
+    var file: FileAdapter?
+    var showErrorAlert: ( _ title: String, _ message: String) -> Void = { _, _ in }
+    var updateLoading: (Bool) -> Void = { _ in }
     
     init(fileId: String, model: FileModelProvider) {
         self.fileId = fileId
@@ -27,10 +29,18 @@ class FileViewModel: FileViewModelProvider {
     }
     
     func didLoad() {
-        self.fetchFile(with: fileId)
+        self.updateLoading(true)
+        let result = model.fetchFile(with: fileId)
+        switch result {
+        case .success(let file):
+            self.file = file
+            self.updateLoading(false)
+        case .failure(let error):
+            self.handlerError(error: error)
+        }
     }
     
-    private func fetchFile(with fileId: String) {
-        file = model.fetchFile(fileId: fileId)
+    private func handlerError(error: AppError) {
+        showErrorAlert("Error", error.localizedDescription)
     }
 }

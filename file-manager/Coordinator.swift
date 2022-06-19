@@ -10,5 +10,6 @@ import UIKit
 protocol Coordinator {
     var serviceManager: ServiceManager { get }
     var rootViewController: UINavigationController { get }
+    
     func start()
 }

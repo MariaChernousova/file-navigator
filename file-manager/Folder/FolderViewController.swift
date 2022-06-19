@@ -7,11 +7,28 @@
 
 import UIKit
 
-class FolderViewController: UIViewController {
+class FolderViewController: BaseViewController {
     
     enum ViewType {
         case grid
         case list
+    }
+    
+    private enum Constant {
+        static let addFolderTitle = "Add folder"
+        static let addFileTitle = "Add file"
+        static let addActionTitle = "Ooops..."
+        static let addActionMessage = "action will be added soon 😉"
+        static let menuTitle = "Add..."
+        static let alertActionTitle = "OK"
+        
+        static let addFolderImageName = "folder.badge.plus"
+        static let addFileImageName = "doc.badge.plus"
+        static let menuButtonImageName = "plus"
+        static let gridImageName = "square.grid.2x2"
+        static let listImageName = "list.bullet"
+        static let folderImageName = "folder"
+        static let fileImageName = "doc.richtext"
     }
     
     private var viewType = ViewType.grid
@@ -25,34 +42,32 @@ class FolderViewController: UIViewController {
     
     
     private lazy var addFolderItem = UIAction(
-        title: "Add folder",
-        image: UIImage(systemName: "folder.badge.plus")
-    ) { action in
-        
-        print("Add folder action was tapped")
-    }
+        title: Constant.addFolderTitle,
+        image: UIImage(systemName: Constant.addFolderImageName)) { _ in
+            self.showAlert(title: Constant.addActionTitle,
+                           message: "\(Constant.addFolderTitle) \(Constant.addActionMessage)")
+        }
     
     private lazy var addFileItem = UIAction(
-        title: "Add file",
-        image: UIImage(systemName: "doc.badge.plus")
-    ) { action in
-        
-        print("Add folder action was tapped")
-    }
+        title: Constant.addFileTitle,
+        image: UIImage(systemName: Constant.addFileImageName)) { _ in
+            self.showAlert(title: Constant.addActionTitle,
+                           message: "\(Constant.addFileTitle) \(Constant.addActionMessage)")
+        }
     
     private lazy var menu = UIMenu(
-        title: "Add...",
+        title: Constant.menuTitle,
         options: .displayInline,
         children: [addFileItem, addFolderItem]
     )
     
     private lazy var menuButtonItem = UIBarButtonItem(
-        image: UIImage(systemName: "plus"),
+        image: UIImage(systemName: Constant.menuButtonImageName),
         menu: menu
     )
     
     private lazy var collectionTableSwitcherItem = UIBarButtonItem(
-        image: UIImage(systemName: "square.grid.2x2"),
+        image: UIImage(systemName: Constant.gridImageName),
         style: .done,
         target: self,
         action: #selector(toggleSwitcher)
@@ -64,27 +79,25 @@ class FolderViewController: UIViewController {
             guard let gridCell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: GridViewCell.identifier, for: indexPath) as? GridViewCell else { return nil }
             if let folder = itemAdapter as? FolderAdapter {
-                gridCell.configure(with: itemAdapter.title, image: "folder")
+                gridCell.configure(with: itemAdapter.title, image: Constant.folderImageName)
             } else if let file = itemAdapter as? FileAdapter {
-                gridCell.configure(with: itemAdapter.title, image: "doc.richtext")
+                gridCell.configure(with: itemAdapter.title, image: Constant.fileImageName)
             }
             gridCell.tapHandler = {
                 self.viewModel.select(item: itemAdapter)
             }
-//            collectionView.reloadData()
             return gridCell
         case .list:
             guard let lineCell = collectionView
                 .dequeueReusableCell(withReuseIdentifier: LineViewCell.identifier, for: indexPath) as? LineViewCell else { return nil }
             if let folder = itemAdapter as? FolderAdapter {
-                lineCell.configure(with: itemAdapter.title, image: "folder")
+                lineCell.configure(with: itemAdapter.title, image: Constant.folderImageName)
             } else if let file = itemAdapter as? FileAdapter {
-                lineCell.configure(with: itemAdapter.title, image: "doc.richtext")
+                lineCell.configure(with: itemAdapter.title, image: Constant.fileImageName)
             }
             lineCell.tapHandler = {
                 self.viewModel.select(item: itemAdapter)
             }
-//            collectionView.reloadData()
             return lineCell
         }
     }
@@ -160,6 +173,14 @@ class FolderViewController: UIViewController {
                 dataSource.apply(snapshot)
             }
         }
+        
+        viewModel.showErrorAlert = { title, message in
+            self.showAlert(title: title, message: message)
+        }
+        
+        viewModel.updateLoading = { isLoading in
+            self.setLoading(isLoading)
+        }
     }
     
     private func setupSubviews() {
@@ -173,7 +194,6 @@ class FolderViewController: UIViewController {
         collectionView.register(LineViewCell.self, forCellWithReuseIdentifier: LineViewCell.identifier)
         
         collectionView.dataSource = dataSource
-//        collectionView.delegate = self
     }
     
     private func setupAutoLayout() {
@@ -186,7 +206,7 @@ class FolderViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-
+    
     private func applyCollectionViewLayout(_ viewType: ViewType) -> UICollectionViewLayout {
         switch viewType {
         case .grid:
@@ -194,6 +214,16 @@ class FolderViewController: UIViewController {
         case .list:
             return createLineCompositionalLayout()
         }
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let action = UIAlertAction(title: Constant.alertActionTitle,
+                                   style: .cancel)
+        let alertController = UIAlertController(title: title,
+                                                message: message,
+                                                preferredStyle: .alert)
+        alertController.addAction(action)
+        present(alertController, animated: true)
     }
     
     @objc private func toggleSwitcher(sender: UIBarButtonItem) {
@@ -211,7 +241,7 @@ class FolderViewController: UIViewController {
                 snapshot.reloadSections(identifiers)
                 self.dataSource.apply(snapshot)
             }
-            sender.image = UIImage(systemName: "square.grid.2x2")
+            sender.image = UIImage(systemName: Constant.gridImageName)
         case .list:
             collectionView.setCollectionViewLayout(createLineCompositionalLayout(), animated: true) { _ in
                 var snapshot = self.dataSource.snapshot()
@@ -219,14 +249,7 @@ class FolderViewController: UIViewController {
                 snapshot.reloadSections(identifiers)
                 self.dataSource.apply(snapshot)
             }
-            sender.image = UIImage(systemName: "list.bullet")
+            sender.image = UIImage(systemName: Constant.listImageName)
         }
     }
 }
-//
-//extension FolderViewController: UICollectionViewDelegate {
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        guard let selectedItem = dataSource.itemIdentifier(for: indexPath) else { return }
-//        viewModel.select(item: selectedItem)
-//    }
-//}

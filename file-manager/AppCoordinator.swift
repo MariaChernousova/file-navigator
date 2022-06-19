@@ -8,6 +8,7 @@
 import UIKit
 
 class AppCoordinator: Coordinator {
+    
     var serviceManager: ServiceManager
     var rootViewController: UINavigationController
     

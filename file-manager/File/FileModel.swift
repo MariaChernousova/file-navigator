@@ -8,17 +8,18 @@
 import Foundation
 
 protocol FileModelProvider {
-    func fetchFile(fileId: String) -> File
+    func fetchFile(with id: String) -> Result<FileAdapter, AppError>
 }
 
 class FileModel: FileModelProvider {
-    private let fileFetcher: FileFetcherContext
+    
+    private let fileFetcher: FileManipulatorContext
     
     init(serviceManager: ServiceManager) {
-        self.fileFetcher = serviceManager.fileFetcher
+        self.fileFetcher = serviceManager.fileManipulator
     }
     
-    func fetchFile(fileId: String) -> File {
-        fileFetcher.fetchFile(fileId: fileId)
+    func fetchFile(with id: String) -> Result<FileAdapter, AppError> {
+        fileFetcher.fetchFile(id: id)
     }
 }

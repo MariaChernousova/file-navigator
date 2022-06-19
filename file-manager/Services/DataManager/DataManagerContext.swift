@@ -8,5 +8,5 @@
 import Foundation
 
 protocol DataManagerContext {
-    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, CoreDataStackError>) -> Void))
+    func saveData(rows: [SpreadSheet.Row], completionHandler: @escaping ((Result<String, AppError>) -> Void))
 }

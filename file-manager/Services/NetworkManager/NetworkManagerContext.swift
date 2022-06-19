@@ -7,6 +7,15 @@
 
 import Foundation
 
+protocol RequestConfigurationContext {
+    var sheetID: String { get }
+    var range: String { get }
+    var httpHeader: String { get }
+    var key: String { get }
+    
+    func buildURL() -> URL?
+}
+
 protocol NetworkManagerContext {
-    func loadData(completionHandler: @escaping (Result<SpreadSheet, Error>) -> Void)
+    func loadData<T: Codable>(completionHandler: @escaping (Result<T, AppError>) -> Void)
 }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		67E3C2D62857AF3600545FBD /* ResultControllerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E3C2D52857AF3600545FBD /* ResultControllerContext.swift */; };
-		67E3C2E42857ED1F00545FBD /* ItemsFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E3C2E32857ED1F00545FBD /* ItemsFetcher.swift */; };
+		67E3C2E42857ED1F00545FBD /* ItemManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E3C2E32857ED1F00545FBD /* ItemManipulator.swift */; };
 		A989EF912853403F00E359BF /* FolderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EF902853403F00E359BF /* FolderViewController.swift */; };
 		A989EF932853406D00E359BF /* FolderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EF922853406D00E359BF /* FolderViewModel.swift */; };
 		A989EF952853407700E359BF /* FolderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EF942853407700E359BF /* FolderModel.swift */; };
@@ -30,17 +30,48 @@
 		A989EFD028577D0F00E359BF /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFCF28577D0F00E359BF /* DataManager.swift */; };
 		A989EFD228577D1B00E359BF /* DataManagerContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFD128577D1B00E359BF /* DataManagerContext.swift */; };
 		A989EFD5285895C100E359BF /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFD4285895C100E359BF /* NSObject+Extensions.swift */; };
-		A989EFF0285B29EB00E359BF /* FileAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFEF285B29EB00E359BF /* FileAdapter.swift */; };
-		A989EFF2285B2A1400E359BF /* FolderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF1285B2A1400E359BF /* FolderAdapter.swift */; };
-		A989EFF4285B2A2D00E359BF /* ItemAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF3285B2A2D00E359BF /* ItemAdapter.swift */; };
-		A989EFF6285B5A1B00E359BF /* FileFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF5285B5A1B00E359BF /* FileFetcher.swift */; };
-		A989EFF9285B70C800E359BF /* FileFetcherContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF8285B70C800E359BF /* FileFetcherContext.swift */; };
+		A989EFF6285B5A1B00E359BF /* FileManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF5285B5A1B00E359BF /* FileManipulator.swift */; };
+		A989EFF9285B70C800E359BF /* FileManipulatorContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFF8285B70C800E359BF /* FileManipulatorContext.swift */; };
+		A989EFFC285B99A900E359BF /* SpreadSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFFB285B99A900E359BF /* SpreadSheet.swift */; };
+		A989EFFE285BA47700E359BF /* RequestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A989EFFD285BA47700E359BF /* RequestConfiguration.swift */; };
 		A9975AB1284E922500618AE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB0284E922500618AE6 /* AppDelegate.swift */; };
 		A9975AB3284E922500618AE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB2284E922500618AE6 /* SceneDelegate.swift */; };
 		A9975ABB284E922500618AE6 /* file_manager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9975AB9284E922500618AE6 /* file_manager.xcdatamodeld */; };
 		A9975ABD284E922800618AE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9975ABC284E922800618AE6 /* Assets.xcassets */; };
 		A9975AC0284E922800618AE6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9975ABE284E922800618AE6 /* LaunchScreen.storyboard */; };
-		E9F9AA26285A706900A01307 /* ItemsFetcherContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AA25285A706900A01307 /* ItemsFetcherContext.swift */; };
+		A9D528E2285E314A007D438D /* FileAdapterFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D528E1285E314A007D438D /* FileAdapterFake.swift */; };
+		A9D528E4285E322A007D438D /* FileModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D528E3285E322A007D438D /* FileModelMock.swift */; };
+		A9D528E6285E3248007D438D /* FileViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D528E5285E3248007D438D /* FileViewModelTest.swift */; };
+		A9D528F9285E8895007D438D /* ItemManipulatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D528F8285E8895007D438D /* ItemManipulatorTest.swift */; };
+		A9D528FB285E9340007D438D /* ItemManipulatorCoreDataBaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D528FA285E9340007D438D /* ItemManipulatorCoreDataBaseMock.swift */; };
+		A9D528FD285E9422007D438D /* ItemManipulatorManageObjectContextFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D528FC285E9422007D438D /* ItemManipulatorManageObjectContextFake.swift */; };
+		A9D528FF285E9676007D438D /* ItemManipulatorItemFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D528FE285E9676007D438D /* ItemManipulatorItemFake.swift */; };
+		A9D52901285EA7F3007D438D /* ItemResultControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D52900285EA7F3007D438D /* ItemResultControllerMock.swift */; };
+		A9D52904285F304A007D438D /* FolderManipulatorCoreDataBaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D52903285F304A007D438D /* FolderManipulatorCoreDataBaseMock.swift */; };
+		A9D52906285F30D1007D438D /* FolderManipulatorManageObjectContextFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D52905285F30D1007D438D /* FolderManipulatorManageObjectContextFake.swift */; };
+		A9D5290A285F339F007D438D /* FolderManipulatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D52909285F339F007D438D /* FolderManipulatorTest.swift */; };
+		A9D5290F285F5300007D438D /* FileManipulatorCoreDataBaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D5290E285F5300007D438D /* FileManipulatorCoreDataBaseMock.swift */; };
+		A9D52911285F532C007D438D /* FileManipulatorManageObjectContextFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D52910285F532C007D438D /* FileManipulatorManageObjectContextFake.swift */; };
+		A9D52913285F5352007D438D /* FileManipulatorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D52912285F5352007D438D /* FileManipulatorTest.swift */; };
+		A9D52916285F89DB007D438D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D52915285F89DB007D438D /* BaseViewController.swift */; };
+		A9D52918285F89FB007D438D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D52917285F89FB007D438D /* LoadingView.swift */; };
+		A9F84BB6285C9377000A3D12 /* FolderAdapterFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F84BB5285C9377000A3D12 /* FolderAdapterFake.swift */; };
+		A9F84BB8285C9C34000A3D12 /* FolderModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F84BB7285C9C34000A3D12 /* FolderModelMock.swift */; };
+		A9F84BBC285CC562000A3D12 /* FolderViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9F84BBB285CC562000A3D12 /* FolderViewModelTest.swift */; };
+		E95FFA7A285BC47D00691998 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA79285BC47D00691998 /* AppError.swift */; };
+		E95FFA7E285BC7F900691998 /* FolderManipulatorContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA7D285BC7F900691998 /* FolderManipulatorContext.swift */; };
+		E95FFA80285BC80300691998 /* FolderManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA7F285BC80300691998 /* FolderManipulator.swift */; };
+		E95FFA84285BD00100691998 /* ManagedObjectBuilderContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA83285BD00100691998 /* ManagedObjectBuilderContext.swift */; };
+		E95FFA87285BD05A00691998 /* ManagedObjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA86285BD05A00691998 /* ManagedObjectBuilder.swift */; };
+		E95FFA8A285BD20100691998 /* ItemDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA89285BD20100691998 /* ItemDataProvider.swift */; };
+		E95FFA8C285BD21200691998 /* FolderDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA8B285BD21200691998 /* FolderDataProvider.swift */; };
+		E95FFA8E285BD22100691998 /* FileDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA8D285BD22100691998 /* FileDataProvider.swift */; };
+		E95FFA95285BD26E00691998 /* FileAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA92285BD26E00691998 /* FileAdapter.swift */; };
+		E95FFA96285BD26E00691998 /* ItemAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA93285BD26E00691998 /* ItemAdapter.swift */; };
+		E95FFA97285BD26E00691998 /* FolderAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA94285BD26E00691998 /* FolderAdapter.swift */; };
+		E95FFA9D285E095000691998 /* CoreDataMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA9C285E095000691998 /* CoreDataMock.swift */; };
+		E95FFA9F285E0B5D00691998 /* SpreadSheetFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95FFA9E285E0B5D00691998 /* SpreadSheetFake.swift */; };
+		E9F9AA26285A706900A01307 /* ItemManipulatorContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AA25285A706900A01307 /* ItemManipulatorContext.swift */; };
 		E9F9AA2B285A70CF00A01307 /* ItemsResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AA2A285A70CF00A01307 /* ItemsResultController.swift */; };
 		E9F9AA32285A822A00A01307 /* Folder+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AA2C285A822A00A01307 /* Folder+CoreDataClass.swift */; };
 		E9F9AA33285A822A00A01307 /* Folder+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AA2D285A822A00A01307 /* Folder+CoreDataProperties.swift */; };
@@ -50,9 +81,19 @@
 		E9F9AA37285A822A00A01307 /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9AA31285A822A00A01307 /* Item+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A9F84BAE285C8FE0000A3D12 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9975AA5284E922500618AE6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9975AAC284E922500618AE6;
+			remoteInfo = "file-manager";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		67E3C2D52857AF3600545FBD /* ResultControllerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultControllerContext.swift; sourceTree = "<group>"; };
-		67E3C2E32857ED1F00545FBD /* ItemsFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsFetcher.swift; sourceTree = "<group>"; };
+		67E3C2E32857ED1F00545FBD /* ItemManipulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManipulator.swift; sourceTree = "<group>"; };
 		A989EF902853403F00E359BF /* FolderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewController.swift; sourceTree = "<group>"; };
 		A989EF922853406D00E359BF /* FolderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewModel.swift; sourceTree = "<group>"; };
 		A989EF942853407700E359BF /* FolderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModel.swift; sourceTree = "<group>"; };
@@ -74,11 +115,10 @@
 		A989EFCF28577D0F00E359BF /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		A989EFD128577D1B00E359BF /* DataManagerContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerContext.swift; sourceTree = "<group>"; };
 		A989EFD4285895C100E359BF /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
-		A989EFEF285B29EB00E359BF /* FileAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAdapter.swift; sourceTree = "<group>"; };
-		A989EFF1285B2A1400E359BF /* FolderAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAdapter.swift; sourceTree = "<group>"; };
-		A989EFF3285B2A2D00E359BF /* ItemAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemAdapter.swift; sourceTree = "<group>"; };
-		A989EFF5285B5A1B00E359BF /* FileFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFetcher.swift; sourceTree = "<group>"; };
-		A989EFF8285B70C800E359BF /* FileFetcherContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFetcherContext.swift; sourceTree = "<group>"; };
+		A989EFF5285B5A1B00E359BF /* FileManipulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManipulator.swift; sourceTree = "<group>"; };
+		A989EFF8285B70C800E359BF /* FileManipulatorContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManipulatorContext.swift; sourceTree = "<group>"; };
+		A989EFFB285B99A900E359BF /* SpreadSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheet.swift; sourceTree = "<group>"; };
+		A989EFFD285BA47700E359BF /* RequestConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestConfiguration.swift; sourceTree = "<group>"; };
 		A9975AAD284E922500618AE6 /* file-manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "file-manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9975AB0284E922500618AE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9975AB2284E922500618AE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,7 +126,40 @@
 		A9975ABC284E922800618AE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A9975ABF284E922800618AE6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A9975AC1284E922800618AE6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E9F9AA25285A706900A01307 /* ItemsFetcherContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsFetcherContext.swift; sourceTree = "<group>"; };
+		A9D528E1285E314A007D438D /* FileAdapterFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAdapterFake.swift; sourceTree = "<group>"; };
+		A9D528E3285E322A007D438D /* FileModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMock.swift; sourceTree = "<group>"; };
+		A9D528E5285E3248007D438D /* FileViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewModelTest.swift; sourceTree = "<group>"; };
+		A9D528F8285E8895007D438D /* ItemManipulatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManipulatorTest.swift; sourceTree = "<group>"; };
+		A9D528FA285E9340007D438D /* ItemManipulatorCoreDataBaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManipulatorCoreDataBaseMock.swift; sourceTree = "<group>"; };
+		A9D528FC285E9422007D438D /* ItemManipulatorManageObjectContextFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManipulatorManageObjectContextFake.swift; sourceTree = "<group>"; };
+		A9D528FE285E9676007D438D /* ItemManipulatorItemFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManipulatorItemFake.swift; sourceTree = "<group>"; };
+		A9D52900285EA7F3007D438D /* ItemResultControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemResultControllerMock.swift; sourceTree = "<group>"; };
+		A9D52903285F304A007D438D /* FolderManipulatorCoreDataBaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManipulatorCoreDataBaseMock.swift; sourceTree = "<group>"; };
+		A9D52905285F30D1007D438D /* FolderManipulatorManageObjectContextFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManipulatorManageObjectContextFake.swift; sourceTree = "<group>"; };
+		A9D52909285F339F007D438D /* FolderManipulatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManipulatorTest.swift; sourceTree = "<group>"; };
+		A9D5290E285F5300007D438D /* FileManipulatorCoreDataBaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManipulatorCoreDataBaseMock.swift; sourceTree = "<group>"; };
+		A9D52910285F532C007D438D /* FileManipulatorManageObjectContextFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManipulatorManageObjectContextFake.swift; sourceTree = "<group>"; };
+		A9D52912285F5352007D438D /* FileManipulatorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManipulatorTest.swift; sourceTree = "<group>"; };
+		A9D52915285F89DB007D438D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		A9D52917285F89FB007D438D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		A9F84BAA285C8FE0000A3D12 /* file-managerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "file-managerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9F84BB5285C9377000A3D12 /* FolderAdapterFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderAdapterFake.swift; sourceTree = "<group>"; };
+		A9F84BB7285C9C34000A3D12 /* FolderModelMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderModelMock.swift; sourceTree = "<group>"; };
+		A9F84BBB285CC562000A3D12 /* FolderViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderViewModelTest.swift; sourceTree = "<group>"; };
+		E95FFA79285BC47D00691998 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		E95FFA7D285BC7F900691998 /* FolderManipulatorContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManipulatorContext.swift; sourceTree = "<group>"; };
+		E95FFA7F285BC80300691998 /* FolderManipulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderManipulator.swift; sourceTree = "<group>"; };
+		E95FFA83285BD00100691998 /* ManagedObjectBuilderContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectBuilderContext.swift; sourceTree = "<group>"; };
+		E95FFA86285BD05A00691998 /* ManagedObjectBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedObjectBuilder.swift; sourceTree = "<group>"; };
+		E95FFA89285BD20100691998 /* ItemDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemDataProvider.swift; sourceTree = "<group>"; };
+		E95FFA8B285BD21200691998 /* FolderDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderDataProvider.swift; sourceTree = "<group>"; };
+		E95FFA8D285BD22100691998 /* FileDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDataProvider.swift; sourceTree = "<group>"; };
+		E95FFA92285BD26E00691998 /* FileAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileAdapter.swift; sourceTree = "<group>"; };
+		E95FFA93285BD26E00691998 /* ItemAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemAdapter.swift; sourceTree = "<group>"; };
+		E95FFA94285BD26E00691998 /* FolderAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderAdapter.swift; sourceTree = "<group>"; };
+		E95FFA9C285E095000691998 /* CoreDataMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataMock.swift; sourceTree = "<group>"; };
+		E95FFA9E285E0B5D00691998 /* SpreadSheetFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadSheetFake.swift; sourceTree = "<group>"; };
+		E9F9AA25285A706900A01307 /* ItemManipulatorContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManipulatorContext.swift; sourceTree = "<group>"; };
 		E9F9AA2A285A70CF00A01307 /* ItemsResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsResultController.swift; sourceTree = "<group>"; };
 		E9F9AA2C285A822A00A01307 /* Folder+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E9F9AA2D285A822A00A01307 /* Folder+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Folder+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -98,6 +171,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		A9975AAA284E922500618AE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9F84BA7285C8FE0000A3D12 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -136,7 +216,6 @@
 				E9F9AA22285A700D00A01307 /* CoreData */,
 				A989EFCE28577CEC00E359BF /* DataManager */,
 				A989EFA72853457100E359BF /* ServiceLocator */,
-				A989EFA62853455B00E359BF /* CoreDataBase */,
 				A989EFA52853454B00E359BF /* NetworkManager */,
 			);
 			path = Services;
@@ -145,6 +224,7 @@
 		A989EFA52853454B00E359BF /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
+				A989EFFF285BA60E00E359BF /* DTO */,
 				A989EFB428534DDE00E359BF /* NetworkManagerContext.swift */,
 				A989EFB228534DCF00E359BF /* NetworkManager.swift */,
 			);
@@ -195,29 +275,28 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
-		A989EFF7285B70A500E359BF /* FileFetcher */ = {
+		A989EFF7285B70A500E359BF /* File */ = {
 			isa = PBXGroup;
 			children = (
-				A989EFF5285B5A1B00E359BF /* FileFetcher.swift */,
-				A989EFF8285B70C800E359BF /* FileFetcherContext.swift */,
+				E95FFA74285BBF7500691998 /* Manipulator */,
 			);
-			path = FileFetcher;
+			path = File;
 			sourceTree = "<group>";
 		};
-		A989EFFA285B718B00E359BF /* Adapters */ = {
+		A989EFFF285BA60E00E359BF /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				A989EFF3285B2A2D00E359BF /* ItemAdapter.swift */,
-				A989EFF1285B2A1400E359BF /* FolderAdapter.swift */,
-				A989EFEF285B29EB00E359BF /* FileAdapter.swift */,
+				A989EFFB285B99A900E359BF /* SpreadSheet.swift */,
+				A989EFFD285BA47700E359BF /* RequestConfiguration.swift */,
 			);
-			path = Adapters;
+			path = DTO;
 			sourceTree = "<group>";
 		};
 		A9975AA4284E922500618AE6 = {
 			isa = PBXGroup;
 			children = (
 				A9975AAF284E922500618AE6 /* file-manager */,
+				A9F84BAB285C8FE0000A3D12 /* file-managerTests */,
 				A9975AAE284E922500618AE6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -226,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				A9975AAD284E922500618AE6 /* file-manager.app */,
+				A9F84BAA285C8FE0000A3D12 /* file-managerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -233,8 +313,10 @@
 		A9975AAF284E922500618AE6 /* file-manager */ = {
 			isa = PBXGroup;
 			children = (
+				E95FFA76285BC46700691998 /* Shared */,
 				A989EFD3285895A200E359BF /* Extensions */,
 				A989EFA42853447E00E359BF /* Services */,
+				A9D52914285F89C8007D438D /* Base */,
 				A989EF8D28533F7200E359BF /* File */,
 				A989EF8C28533F3400E359BF /* Folder */,
 				A9975AF72852722F00618AE6 /* CoreData */,
@@ -252,41 +334,303 @@
 		A9975AF72852722F00618AE6 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				E95FFA91285BD26E00691998 /* Adapters */,
+				E95FFA72285BBEEB00691998 /* MangedObjects */,
+				A9975AB9284E922500618AE6 /* file_manager.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		A9D528E0285E3125007D438D /* File */ = {
+			isa = PBXGroup;
+			children = (
+				A9D528E8285E3258007D438D /* Fakes */,
+				A9D528E7285E324E007D438D /* Mocks */,
+				A9D528E5285E3248007D438D /* FileViewModelTest.swift */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		A9D528E7285E324E007D438D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A9D528E3285E322A007D438D /* FileModelMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		A9D528E8285E3258007D438D /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				A9D528E1285E314A007D438D /* FileAdapterFake.swift */,
+			);
+			path = Fakes;
+			sourceTree = "<group>";
+		};
+		A9D528E9285E69BB007D438D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A9D5290D285F52DD007D438D /* FileManipulator */,
+				A9D52902285F3003007D438D /* FolderManipulator */,
+				A9D528F5285E83ED007D438D /* ItemManipulator */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		A9D528F5285E83ED007D438D /* ItemManipulator */ = {
+			isa = PBXGroup;
+			children = (
+				A9D5291B285F9A32007D438D /* Mocks */,
+				A9D5291A285F9A21007D438D /* Fakes */,
+				A9D528F8285E8895007D438D /* ItemManipulatorTest.swift */,
+			);
+			path = ItemManipulator;
+			sourceTree = "<group>";
+		};
+		A9D52902285F3003007D438D /* FolderManipulator */ = {
+			isa = PBXGroup;
+			children = (
+				A9D5291D285F9A5F007D438D /* Mocks */,
+				A9D5291C285F9A56007D438D /* Fakes */,
+				A9D52909285F339F007D438D /* FolderManipulatorTest.swift */,
+			);
+			path = FolderManipulator;
+			sourceTree = "<group>";
+		};
+		A9D5290D285F52DD007D438D /* FileManipulator */ = {
+			isa = PBXGroup;
+			children = (
+				A9D5291F285F9A7F007D438D /* Mocks */,
+				A9D5291E285F9A76007D438D /* Fakes */,
+				A9D52912285F5352007D438D /* FileManipulatorTest.swift */,
+			);
+			path = FileManipulator;
+			sourceTree = "<group>";
+		};
+		A9D52914285F89C8007D438D /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				A9D52919285F8A05007D438D /* Components */,
+				A9D52915285F89DB007D438D /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		A9D52919285F8A05007D438D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				A9D52917285F89FB007D438D /* LoadingView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		A9D5291A285F9A21007D438D /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				A9D528FC285E9422007D438D /* ItemManipulatorManageObjectContextFake.swift */,
+				A9D528FE285E9676007D438D /* ItemManipulatorItemFake.swift */,
+			);
+			path = Fakes;
+			sourceTree = "<group>";
+		};
+		A9D5291B285F9A32007D438D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A9D528FA285E9340007D438D /* ItemManipulatorCoreDataBaseMock.swift */,
+				A9D52900285EA7F3007D438D /* ItemResultControllerMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		A9D5291C285F9A56007D438D /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				A9D52905285F30D1007D438D /* FolderManipulatorManageObjectContextFake.swift */,
+			);
+			path = Fakes;
+			sourceTree = "<group>";
+		};
+		A9D5291D285F9A5F007D438D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A9D52903285F304A007D438D /* FolderManipulatorCoreDataBaseMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		A9D5291E285F9A76007D438D /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				A9D52910285F532C007D438D /* FileManipulatorManageObjectContextFake.swift */,
+			);
+			path = Fakes;
+			sourceTree = "<group>";
+		};
+		A9D5291F285F9A7F007D438D /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A9D5290E285F5300007D438D /* FileManipulatorCoreDataBaseMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		A9F84BAB285C8FE0000A3D12 /* file-managerTests */ = {
+			isa = PBXGroup;
+			children = (
+				A9D528E9285E69BB007D438D /* Services */,
+				A9D528E0285E3125007D438D /* File */,
+				A9F84BB3285C9091000A3D12 /* Folder */,
+			);
+			path = "file-managerTests";
+			sourceTree = "<group>";
+		};
+		A9F84BB3285C9091000A3D12 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA9B285E095000691998 /* CoreData */,
+				E95FFAA1285E0C5900691998 /* Mocks */,
+				E95FFAA0285E0C4200691998 /* Fakes */,
+				A9F84BBB285CC562000A3D12 /* FolderViewModelTest.swift */,
+			);
+			path = Folder;
+			sourceTree = "<group>";
+		};
+		E95FFA72285BBEEB00691998 /* MangedObjects */ = {
+			isa = PBXGroup;
+			children = (
 				E9F9AA2C285A822A00A01307 /* Folder+CoreDataClass.swift */,
 				E9F9AA2D285A822A00A01307 /* Folder+CoreDataProperties.swift */,
 				E9F9AA2E285A822A00A01307 /* File+CoreDataClass.swift */,
 				E9F9AA2F285A822A00A01307 /* File+CoreDataProperties.swift */,
 				E9F9AA30285A822A00A01307 /* Item+CoreDataClass.swift */,
 				E9F9AA31285A822A00A01307 /* Item+CoreDataProperties.swift */,
-				A9975AB9284E922500618AE6 /* file_manager.xcdatamodeld */,
+			);
+			path = MangedObjects;
+			sourceTree = "<group>";
+		};
+		E95FFA74285BBF7500691998 /* Manipulator */ = {
+			isa = PBXGroup;
+			children = (
+				A989EFF5285B5A1B00E359BF /* FileManipulator.swift */,
+				A989EFF8285B70C800E359BF /* FileManipulatorContext.swift */,
+			);
+			path = Manipulator;
+			sourceTree = "<group>";
+		};
+		E95FFA75285BBF9E00691998 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				E9F9AA23285A702600A01307 /* Manipulator */,
+				E9F9AA27285A709100A01307 /* ResultController */,
+			);
+			path = Item;
+			sourceTree = "<group>";
+		};
+		E95FFA76285BC46700691998 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA79285BC47D00691998 /* AppError.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		E95FFA7B285BC7DF00691998 /* Folder */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA7C285BC7E500691998 /* Manipulator */,
+			);
+			path = Folder;
+			sourceTree = "<group>";
+		};
+		E95FFA7C285BC7E500691998 /* Manipulator */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA7D285BC7F900691998 /* FolderManipulatorContext.swift */,
+				E95FFA7F285BC80300691998 /* FolderManipulator.swift */,
+			);
+			path = Manipulator;
+			sourceTree = "<group>";
+		};
+		E95FFA85285BD04200691998 /* ManagedObjectBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA88285BD1F700691998 /* DataProviders */,
+				E95FFA83285BD00100691998 /* ManagedObjectBuilderContext.swift */,
+				E95FFA86285BD05A00691998 /* ManagedObjectBuilder.swift */,
+			);
+			path = ManagedObjectBuilder;
+			sourceTree = "<group>";
+		};
+		E95FFA88285BD1F700691998 /* DataProviders */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA89285BD20100691998 /* ItemDataProvider.swift */,
+				E95FFA8B285BD21200691998 /* FolderDataProvider.swift */,
+				E95FFA8D285BD22100691998 /* FileDataProvider.swift */,
+			);
+			path = DataProviders;
+			sourceTree = "<group>";
+		};
+		E95FFA91285BD26E00691998 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA92285BD26E00691998 /* FileAdapter.swift */,
+				E95FFA93285BD26E00691998 /* ItemAdapter.swift */,
+				E95FFA94285BD26E00691998 /* FolderAdapter.swift */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
+		E95FFA9B285E095000691998 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA9C285E095000691998 /* CoreDataMock.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		E95FFAA0285E0C4200691998 /* Fakes */ = {
+			isa = PBXGroup;
+			children = (
+				E95FFA9E285E0B5D00691998 /* SpreadSheetFake.swift */,
+				A9F84BB5285C9377000A3D12 /* FolderAdapterFake.swift */,
+			);
+			path = Fakes;
+			sourceTree = "<group>";
+		};
+		E95FFAA1285E0C5900691998 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				A9F84BB7285C9C34000A3D12 /* FolderModelMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 		E9F9AA22285A700D00A01307 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				A989EFFA285B718B00E359BF /* Adapters */,
-				A989EFF7285B70A500E359BF /* FileFetcher */,
-				E9F9AA27285A709100A01307 /* ResultController */,
-				E9F9AA23285A702600A01307 /* ItemsFetchers */,
+				A989EFA62853455B00E359BF /* CoreDataBase */,
+				E95FFA85285BD04200691998 /* ManagedObjectBuilder */,
+				67E3C2D52857AF3600545FBD /* ResultControllerContext.swift */,
+				E95FFA7B285BC7DF00691998 /* Folder */,
+				E95FFA75285BBF9E00691998 /* Item */,
+				A989EFF7285B70A500E359BF /* File */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
 		};
-		E9F9AA23285A702600A01307 /* ItemsFetchers */ = {
+		E9F9AA23285A702600A01307 /* Manipulator */ = {
 			isa = PBXGroup;
 			children = (
-				67E3C2E32857ED1F00545FBD /* ItemsFetcher.swift */,
-				E9F9AA25285A706900A01307 /* ItemsFetcherContext.swift */,
+				67E3C2E32857ED1F00545FBD /* ItemManipulator.swift */,
+				E9F9AA25285A706900A01307 /* ItemManipulatorContext.swift */,
 			);
-			path = ItemsFetchers;
+			path = Manipulator;
 			sourceTree = "<group>";
 		};
 		E9F9AA27285A709100A01307 /* ResultController */ = {
 			isa = PBXGroup;
 			children = (
-				67E3C2D52857AF3600545FBD /* ResultControllerContext.swift */,
 				E9F9AA2A285A70CF00A01307 /* ItemsResultController.swift */,
 			);
 			path = ResultController;
@@ -312,6 +656,24 @@
 			productReference = A9975AAD284E922500618AE6 /* file-manager.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A9F84BA9285C8FE0000A3D12 /* file-managerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9F84BB2285C8FE0000A3D12 /* Build configuration list for PBXNativeTarget "file-managerTests" */;
+			buildPhases = (
+				A9F84BA6285C8FE0000A3D12 /* Sources */,
+				A9F84BA7285C8FE0000A3D12 /* Frameworks */,
+				A9F84BA8285C8FE0000A3D12 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9F84BAF285C8FE0000A3D12 /* PBXTargetDependency */,
+			);
+			name = "file-managerTests";
+			productName = "file-managerTests";
+			productReference = A9F84BAA285C8FE0000A3D12 /* file-managerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -324,6 +686,10 @@
 				TargetAttributes = {
 					A9975AAC284E922500618AE6 = {
 						CreatedOnToolsVersion = 13.4.1;
+					};
+					A9F84BA9285C8FE0000A3D12 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = A9975AAC284E922500618AE6;
 					};
 				};
 			};
@@ -341,6 +707,7 @@
 			projectRoot = "";
 			targets = (
 				A9975AAC284E922500618AE6 /* file-manager */,
+				A9F84BA9285C8FE0000A3D12 /* file-managerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -355,6 +722,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A9F84BA8285C8FE0000A3D12 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -362,9 +736,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E95FFA97285BD26E00691998 /* FolderAdapter.swift in Sources */,
 				A989EF952853407700E359BF /* FolderModel.swift in Sources */,
 				A989EF932853406D00E359BF /* FolderViewModel.swift in Sources */,
+				A989EFFE285BA47700E359BF /* RequestConfiguration.swift in Sources */,
 				A989EF9D2853411300E359BF /* FileModel.swift in Sources */,
+				E95FFA8C285BD21200691998 /* FolderDataProvider.swift in Sources */,
 				A989EFB128534DB500E359BF /* ServiceManager.swift in Sources */,
 				A989EFB72853D21200E359BF /* LineViewCell.swift in Sources */,
 				A9975AB1284E922500618AE6 /* AppDelegate.swift in Sources */,
@@ -372,26 +749,32 @@
 				E9F9AA32285A822A00A01307 /* Folder+CoreDataClass.swift in Sources */,
 				A989EFA12853436600E359BF /* AppCoordinator.swift in Sources */,
 				A989EFA9285345F300E359BF /* CoreDataBase.swift in Sources */,
-				A989EFF0285B29EB00E359BF /* FileAdapter.swift in Sources */,
 				A989EF99285340F700E359BF /* FileViewController.swift in Sources */,
-				A989EFF4285B2A2D00E359BF /* ItemAdapter.swift in Sources */,
 				E9F9AA2B285A70CF00A01307 /* ItemsResultController.swift in Sources */,
-				A989EFF9285B70C800E359BF /* FileFetcherContext.swift in Sources */,
+				A989EFF9285B70C800E359BF /* FileManipulatorContext.swift in Sources */,
+				E95FFA8A285BD20100691998 /* ItemDataProvider.swift in Sources */,
 				E9F9AA34285A822A00A01307 /* File+CoreDataClass.swift in Sources */,
-				67E3C2E42857ED1F00545FBD /* ItemsFetcher.swift in Sources */,
+				67E3C2E42857ED1F00545FBD /* ItemManipulator.swift in Sources */,
+				E95FFA80285BC80300691998 /* FolderManipulator.swift in Sources */,
 				E9F9AA33285A822A00A01307 /* Folder+CoreDataProperties.swift in Sources */,
+				E95FFA87285BD05A00691998 /* ManagedObjectBuilder.swift in Sources */,
 				A989EFB92853D2C900E359BF /* GridViewCell.swift in Sources */,
+				E95FFA7A285BC47D00691998 /* AppError.swift in Sources */,
 				A9975AB3284E922500618AE6 /* SceneDelegate.swift in Sources */,
-				E9F9AA26285A706900A01307 /* ItemsFetcherContext.swift in Sources */,
+				E9F9AA26285A706900A01307 /* ItemManipulatorContext.swift in Sources */,
 				A989EFB328534DCF00E359BF /* NetworkManager.swift in Sources */,
 				E9F9AA35285A822A00A01307 /* File+CoreDataProperties.swift in Sources */,
 				A989EFB528534DDE00E359BF /* NetworkManagerContext.swift in Sources */,
+				E95FFA95285BD26E00691998 /* FileAdapter.swift in Sources */,
 				A9975ABB284E922500618AE6 /* file_manager.xcdatamodeld in Sources */,
-				A989EFF2285B2A1400E359BF /* FolderAdapter.swift in Sources */,
+				E95FFA84285BD00100691998 /* ManagedObjectBuilderContext.swift in Sources */,
 				A989EFD028577D0F00E359BF /* DataManager.swift in Sources */,
 				A989EF9B2853410800E359BF /* FileViewModel.swift in Sources */,
-				A989EFF6285B5A1B00E359BF /* FileFetcher.swift in Sources */,
+				A989EFFC285B99A900E359BF /* SpreadSheet.swift in Sources */,
+				E95FFA7E285BC7F900691998 /* FolderManipulatorContext.swift in Sources */,
+				A989EFF6285B5A1B00E359BF /* FileManipulator.swift in Sources */,
 				A989EF9F2853411E00E359BF /* FileCoordinator.swift in Sources */,
+				A9D52918285F89FB007D438D /* LoadingView.swift in Sources */,
 				A989EFAF28534DAC00E359BF /* ServiceLocator.swift in Sources */,
 				A989EFAB2853460300E359BF /* CoreDataBaseContext.swift in Sources */,
 				E9F9AA36285A822A00A01307 /* Item+CoreDataClass.swift in Sources */,
@@ -399,12 +782,49 @@
 				A989EFD228577D1B00E359BF /* DataManagerContext.swift in Sources */,
 				A989EF912853403F00E359BF /* FolderViewController.swift in Sources */,
 				A989EFAD2853476500E359BF /* Coordinator.swift in Sources */,
+				A9D52916285F89DB007D438D /* BaseViewController.swift in Sources */,
+				E95FFA96285BD26E00691998 /* ItemAdapter.swift in Sources */,
+				E95FFA8E285BD22100691998 /* FileDataProvider.swift in Sources */,
 				E9F9AA37285A822A00A01307 /* Item+CoreDataProperties.swift in Sources */,
 				67E3C2D62857AF3600545FBD /* ResultControllerContext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A9F84BA6285C8FE0000A3D12 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9D528E4285E322A007D438D /* FileModelMock.swift in Sources */,
+				A9D528FB285E9340007D438D /* ItemManipulatorCoreDataBaseMock.swift in Sources */,
+				A9D528E2285E314A007D438D /* FileAdapterFake.swift in Sources */,
+				A9F84BB8285C9C34000A3D12 /* FolderModelMock.swift in Sources */,
+				A9D5290F285F5300007D438D /* FileManipulatorCoreDataBaseMock.swift in Sources */,
+				A9D52911285F532C007D438D /* FileManipulatorManageObjectContextFake.swift in Sources */,
+				A9D52901285EA7F3007D438D /* ItemResultControllerMock.swift in Sources */,
+				E95FFA9D285E095000691998 /* CoreDataMock.swift in Sources */,
+				A9D528FD285E9422007D438D /* ItemManipulatorManageObjectContextFake.swift in Sources */,
+				A9D528F9285E8895007D438D /* ItemManipulatorTest.swift in Sources */,
+				A9F84BBC285CC562000A3D12 /* FolderViewModelTest.swift in Sources */,
+				A9D528FF285E9676007D438D /* ItemManipulatorItemFake.swift in Sources */,
+				A9D52906285F30D1007D438D /* FolderManipulatorManageObjectContextFake.swift in Sources */,
+				A9F84BB6285C9377000A3D12 /* FolderAdapterFake.swift in Sources */,
+				A9D5290A285F339F007D438D /* FolderManipulatorTest.swift in Sources */,
+				A9D52913285F5352007D438D /* FileManipulatorTest.swift in Sources */,
+				A9D52904285F304A007D438D /* FolderManipulatorCoreDataBaseMock.swift in Sources */,
+				A9D528E6285E3248007D438D /* FileViewModelTest.swift in Sources */,
+				E95FFA9F285E0B5D00691998 /* SpreadSheetFake.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A9F84BAF285C8FE0000A3D12 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9975AAC284E922500618AE6 /* file-manager */;
+			targetProxy = A9F84BAE285C8FE0000A3D12 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		A9975ABE284E922800618AE6 /* LaunchScreen.storyboard */ = {
@@ -590,6 +1010,42 @@
 			};
 			name = Release;
 		};
+		A9F84BB0285C8FE0000A3D12 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maryc.native.file-managerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/file-manager.app/file-manager";
+			};
+			name = Debug;
+		};
+		A9F84BB1285C8FE0000A3D12 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.maryc.native.file-managerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/file-manager.app/file-manager";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -607,6 +1063,15 @@
 			buildConfigurations = (
 				A9975AC5284E922800618AE6 /* Debug */,
 				A9975AC6284E922800618AE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9F84BB2285C8FE0000A3D12 /* Build configuration list for PBXNativeTarget "file-managerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9F84BB0285C8FE0000A3D12 /* Debug */,
+				A9F84BB1285C8FE0000A3D12 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

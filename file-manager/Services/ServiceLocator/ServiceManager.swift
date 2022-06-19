@@ -8,8 +8,10 @@
 import Foundation
 
 protocol ServiceManager {
-    var itemsFetcher: ItemsFetcherContext { get }
-    var fileFetcher: FileFetcherContext { get }
+    var managedObjectBuilder: ManagedObjectBuilderContext { get }
+    var itemManipulator: ItemManipulatorContext { get }
+    var folderManipulator: FolderManipulatorContext { get }
+    var fileManipulator: FileManipulatorContext { get }
     var networkManager: NetworkManagerContext { get }
     var dataManager: DataManagerContext { get }
 }
